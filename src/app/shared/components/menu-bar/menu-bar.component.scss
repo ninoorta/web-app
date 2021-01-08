@@ -1,0 +1,64 @@
+span {
+  font-size: 2em;
+  margin-right: 10px;
+}
+.logo {
+  width: 200px;
+  text-align: center;
+  img {
+    margin-top: 20px;
+  }
+}
+.menubar {
+  height: 5rem;
+  background: #d5e7f7;
+  border-top-right-radius: 26px;
+  border-top-left-radius: 26px;
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  z-index: 1001;
+  width: 100%;
+  bottom: 0;
+}
+.menubar ul {
+  display: flex;
+  justify-content: space-between;
+  padding-left: 0;
+  margin-bottom: unset;
+  width: 80%;
+}
+.menubar ul li {
+  display: flex;
+  align-items: center;
+  // margin-top: 0.2em;
+}
+.liDefault {
+  outline: none;
+  list-style: none;
+  color: white;
+  padding: 4px 10px 4px 20px;
+  text-align: center;
+}
+
+.menubar .liActive {
+  outline: none;
+  list-style: none;
+  padding: 4px 10px 4px 20px;
+  text-align: center;
+  color: #224177;
+  position: relative;
+  border-radius: 0 10px 10px 0;
+  background-image: url("../../../../assets/images/menu-bar-icon-bg.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  margin-top: -0.25rem;
+  span {
+    background-color: #d5e7f7;
+    padding: 1rem;
+    border-radius: 50%;
+    margin-bottom: 2rem;
+    font-size: 3rem;
+  }
+}

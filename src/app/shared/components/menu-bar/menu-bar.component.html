@@ -1,0 +1,8 @@
+<div class="menubar">
+    <ul>
+        <li [class]="splitedUrl.includes(item.elementOnUrl) ? 'liActive' : 'liDefault'" *ngFor="let item of menuItem"
+            routerLink="{{item.link}}">
+            <span [class]="item.class">{{item.icon}}</span> {{item.title}}
+        </li>
+    </ul>
+</div>
