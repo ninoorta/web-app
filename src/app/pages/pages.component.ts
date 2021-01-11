@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-pages',
-  styleUrls: ['./pages.component.scss'],
+  styleUrls: ['pages.component.scss'],
   template: `
       <div class="d-flex main-page">
         <div class="main-page-content">

@@ -1,1 +1,42 @@
 /* You can add global styles to this file, and also import other style files */
+
+// import link scss material-icons
+@import "material-icons/iconfont/material-icons.scss";
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: "Segoe UI", sans-serif !important;
+  font-weight: 600;
+}
+button {
+  outline: none;
+}
+
+:root {
+  font-size: 62.5%;
+}
+
+.apexcharts-bar-area:focus {
+  fill: #ddb148;
+}
+
+.apexcharts-toolbar {
+  display: none;
+}
+
+.e-time-modal {
+  z-index: 100;
+}
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
