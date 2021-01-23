@@ -9,9 +9,8 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
 import { MatTabsModule } from "@angular/material/tabs";
 
-
 //shared
-import {SharedModule} from "../app/shared/shared.module";
+import { SharedModule } from "../app/shared/shared.module";
 
 @NgModule({
   declarations: [

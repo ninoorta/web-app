@@ -1,6 +1,6 @@
 import { Component, OnInit, DoCheck } from '@angular/core';
 
-import {menuItem} from './menu-item';
+import { menuItem } from './menu-item';
 @Component({
   selector: 'app-menu-bar',
   templateUrl: './menu-bar.component.html',
@@ -8,7 +8,7 @@ import {menuItem} from './menu-item';
 })
 export class MenuBarComponent implements OnInit, DoCheck {
 
-  constructor() { 
+  constructor() {
     this.menuItem = menuItem;
   }
 
@@ -17,13 +17,13 @@ export class MenuBarComponent implements OnInit, DoCheck {
 
   ngDoCheck(): void {
     this.splitedUrl = window.location.href.split('/')
-    console.log("do check:", this.splitedUrl);
-    
+    // console.log("do check:", this.splitedUrl);
+
   }
 
   ngOnInit(): void {
     this.splitedUrl = window.location.href.split('/')
-    console.log("do init:", this.splitedUrl);
+    // console.log("do init:", this.splitedUrl);
   }
 
 }
