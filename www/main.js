@@ -322,7 +322,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./app.component */ "Sy1n");
 /* harmony import */ var _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/platform-browser/animations */ "R1ws");
 /* harmony import */ var _angular_material_tabs__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/material/tabs */ "wZkO");
-/* harmony import */ var _app_shared_shared_module__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../app/shared/shared.module */ "PCNd");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/forms */ "3Pt+");
+/* harmony import */ var _app_shared_shared_module__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../app/shared/shared.module */ "PCNd");
+/* harmony import */ var _angular_material_dialog__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/material/dialog */ "0IaG");
 
 
 
@@ -331,7 +333,10 @@ __webpack_require__.r(__webpack_exports__);
 // import { HeaderComponent } from './shared/components/header/header.component';
 
 
+
 //shared
+
+// dialog
 
 
 var AppModule = /** @class */ (function () {
@@ -343,7 +348,9 @@ var AppModule = /** @class */ (function () {
                 _app_routing_module__WEBPACK_IMPORTED_MODULE_2__["AppRoutingModule"],
                 _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_4__["BrowserAnimationsModule"],
                 _angular_material_tabs__WEBPACK_IMPORTED_MODULE_5__["MatTabsModule"],
-                _app_shared_shared_module__WEBPACK_IMPORTED_MODULE_6__["SharedModule"]
+                _app_shared_shared_module__WEBPACK_IMPORTED_MODULE_7__["SharedModule"],
+                _angular_forms__WEBPACK_IMPORTED_MODULE_6__["FormsModule"],
+                _angular_material_dialog__WEBPACK_IMPORTED_MODULE_8__["MatDialogModule"]
             ]] });
     return AppModule;
 }());
@@ -352,7 +359,9 @@ var AppModule = /** @class */ (function () {
         _app_routing_module__WEBPACK_IMPORTED_MODULE_2__["AppRoutingModule"],
         _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_4__["BrowserAnimationsModule"],
         _angular_material_tabs__WEBPACK_IMPORTED_MODULE_5__["MatTabsModule"],
-        _app_shared_shared_module__WEBPACK_IMPORTED_MODULE_6__["SharedModule"]] }); })();
+        _app_shared_shared_module__WEBPACK_IMPORTED_MODULE_7__["SharedModule"],
+        _angular_forms__WEBPACK_IMPORTED_MODULE_6__["FormsModule"],
+        _angular_material_dialog__WEBPACK_IMPORTED_MODULE_8__["MatDialogModule"]] }); })();
 /*@__PURE__*/ (function () { _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵsetClassMetadata"](AppModule, [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"],
         args: [{
@@ -364,7 +373,9 @@ var AppModule = /** @class */ (function () {
                     _app_routing_module__WEBPACK_IMPORTED_MODULE_2__["AppRoutingModule"],
                     _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_4__["BrowserAnimationsModule"],
                     _angular_material_tabs__WEBPACK_IMPORTED_MODULE_5__["MatTabsModule"],
-                    _app_shared_shared_module__WEBPACK_IMPORTED_MODULE_6__["SharedModule"]
+                    _app_shared_shared_module__WEBPACK_IMPORTED_MODULE_7__["SharedModule"],
+                    _angular_forms__WEBPACK_IMPORTED_MODULE_6__["FormsModule"],
+                    _angular_material_dialog__WEBPACK_IMPORTED_MODULE_8__["MatDialogModule"]
                 ],
                 providers: [],
                 bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_3__["AppComponent"]]

@@ -4060,6 +4060,104 @@ module.exports = __webpack_require__(/*! C:\Users\admin\Desktop\testAgain\master
 
 /***/ }),
 
+/***/ "NlG8":
+/*!************************************************************!*\
+  !*** ./node_modules/zone.js/dist/zone-patch-user-media.js ***!
+  \************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/**
+* @license Angular v9.1.0-next.4+61.sha-e552591.with-local-changes
+* (c) 2010-2020 Google LLC. https://angular.io/
+* License: MIT
+*/
+(function (factory) {
+   true ? !(__WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
+				(__WEBPACK_AMD_DEFINE_FACTORY__.call(exports, __webpack_require__, exports, module)) :
+				__WEBPACK_AMD_DEFINE_FACTORY__),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__)) : undefined;
+})(function () {
+  'use strict';
+  /**
+   * @license
+   * Copyright Google Inc. All Rights Reserved.
+   *
+   * Use of this source code is governed by an MIT-style license that can be
+   * found in the LICENSE file at https://angular.io/license
+   */
+
+  Zone.__load_patch('getUserMedia', function (global, Zone, api) {
+    function wrapFunctionArgs(func, source) {
+      return function () {
+        var args = Array.prototype.slice.call(arguments);
+        var wrappedArgs = api.bindArguments(args, source ? source : func.name);
+        return func.apply(this, wrappedArgs);
+      };
+    }
+
+    var navigator = global['navigator'];
+
+    if (navigator && navigator.getUserMedia) {
+      navigator.getUserMedia = wrapFunctionArgs(navigator.getUserMedia);
+    }
+  });
+});
+
+/***/ }),
+
+/***/ "eCJE":
+/*!******************************************************************!*\
+  !*** ./node_modules/zone.js/dist/webapis-rtc-peer-connection.js ***!
+  \******************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/**
+* @license Angular v9.1.0-next.4+61.sha-e552591.with-local-changes
+* (c) 2010-2020 Google LLC. https://angular.io/
+* License: MIT
+*/
+(function (factory) {
+   true ? !(__WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
+				(__WEBPACK_AMD_DEFINE_FACTORY__.call(exports, __webpack_require__, exports, module)) :
+				__WEBPACK_AMD_DEFINE_FACTORY__),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__)) : undefined;
+})(function () {
+  'use strict';
+  /**
+   * @license
+   * Copyright Google Inc. All Rights Reserved.
+   *
+   * Use of this source code is governed by an MIT-style license that can be
+   * found in the LICENSE file at https://angular.io/license
+   */
+
+  Zone.__load_patch('RTCPeerConnection', function (global, Zone, api) {
+    var RTCPeerConnection = global['RTCPeerConnection'];
+
+    if (!RTCPeerConnection) {
+      return;
+    }
+
+    var addSymbol = api.symbol('addEventListener');
+    var removeSymbol = api.symbol('removeEventListener');
+    RTCPeerConnection.prototype.addEventListener = RTCPeerConnection.prototype[addSymbol];
+    RTCPeerConnection.prototype.removeEventListener = RTCPeerConnection.prototype[removeSymbol]; // RTCPeerConnection extends EventTarget, so we must clear the symbol
+    // to allow patch RTCPeerConnection.prototype.addEventListener again
+
+    RTCPeerConnection.prototype[addSymbol] = null;
+    RTCPeerConnection.prototype[removeSymbol] = null;
+    api.patchEventTarget(global, [RTCPeerConnection.prototype], {
+      useG: false
+    });
+  });
+});
+
+/***/ }),
+
 /***/ "hN/g":
 /*!**************************!*\
   !*** ./src/polyfills.ts ***!
@@ -4071,6 +4169,10 @@ module.exports = __webpack_require__(/*! C:\Users\admin\Desktop\testAgain\master
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var zone_js_dist_zone__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! zone.js/dist/zone */ "0TWp");
 /* harmony import */ var zone_js_dist_zone__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(zone_js_dist_zone__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var zone_js_dist_webapis_rtc_peer_connection__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! zone.js/dist/webapis-rtc-peer-connection */ "eCJE");
+/* harmony import */ var zone_js_dist_webapis_rtc_peer_connection__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(zone_js_dist_webapis_rtc_peer_connection__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var zone_js_dist_zone_patch_user_media__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! zone.js/dist/zone-patch-user-media */ "NlG8");
+/* harmony import */ var zone_js_dist_zone_patch_user_media__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(zone_js_dist_zone_patch_user_media__WEBPACK_IMPORTED_MODULE_2__);
 /**
  * This file includes polyfills needed by Angular and is loaded before the app.
  * You can add your own extra polyfills to this file.
@@ -4124,6 +4226,10 @@ __webpack_require__.r(__webpack_exports__);
  * Zone JS is required by default for Angular itself.
  */
  // Included with Angular CLI.
+// rtc peer connection patch
+
+// getUserMedia patch
+
 /***************************************************************************************************
  * APPLICATION IMPORTS
  */

@@ -6,14 +6,21 @@ const routes: Routes = [
   {
     path: 'pages',
     loadChildren: () => import('./pages/pages.module')
-    .then(m => m.PagesModule)
+      .then(m => m.PagesModule)
   },
   { path: '', redirectTo: 'pages', pathMatch: 'full' },
   { path: '**', redirectTo: 'pages' },
 ];
 
+
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy' })],
+  imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
+
+// @NgModule({
+//   imports: [RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy' })],
+//   exports: [RouterModule]
+// })
+
 export class AppRoutingModule { }

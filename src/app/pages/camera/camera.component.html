@@ -1,3 +1,73 @@
-<div id="interactive" class="viewport">
-    <!-- QuaggaJS will populate this element -->
+<div class="camera">
+    <div id="interactive" class="viewport">
+        <!-- QuaggaJS will populate this element -->
+        <video autoplay="true" preload="auto"></video>
+        <canvas class="drawingBuffer"></canvas>
+    </div>
+    <!-- Scanned product -->
+    <div class="product">
+        <div class="container">
+            <div class="product__detail ">
+                <!-- Image of product -->
+                <div class="product__detail-image text-center">
+                    <p class="detail-image__text" *ngIf="!productImage">Không có ảnh về sản phẩm này</p>
+                    <img [src]="productImage" *ngIf="productImage" />
+                </div>
+                <!-- Product information -->
+                <div class="product__detail-information">
+                    <!-- product code -->
+                    <p class="detail-information__code">Barcode: {{scannedCode}}</p>
+                    <!-- product name -->
+                    <!-- TO delete when using API -->
+                    <p>Banh Phong Tom Muc Indonesia</p>
+                    <p class="detail-information__name" *ngIf="productName">{{productName}}</p>
+                    <!-- product amount -->
+                    <div class="detail-information__amount">
+                        <label class="detail-information__amount-title">Số lượng: </label>
+                        <span class="detail-information__amount-area">
+                            <button class="btn btn-outline-secondary subtract">-</button>
+                            <input type="number" placeholder="1">
+                            <button class="btn btn-outline-primary add">+</button>
+                        </span>
+                        <!-- Availability -->
+                        <!-- TO ADJUST when using API -->
+                        <p class="information__amount-availability">
+                            <span *ngIf="productAvailability && productAvailability > 0">
+                                Khả dụng: {{productAvailability}}
+                            </span>
+                            <span *ngIf="!productAvailability || productAvailability == 0" class="alert-text">Hết
+                                hàng</span>
+                        </p>
+                    </div>
+                    <!-- product price -->
+                    <p class="detail-information__price">
+                        Giá tiền: {{productPrice}} 500000 vnd
+                    </p>
+                </div>
+                <!-- Product Actions -->
+                <div class="product__detail-actions">
+                    <!-- Add to cart -->
+                    <button class="btn addCart btn-primary">Thêm vào giỏ hàng</button>
+                    <!-- Buy  -->
+                    <button class="btn buyNow btn-outline-primary">Mua ngay</button>
+                </div>
+            </div>
+
+            <!-- Cart -->
+            <div class="cart" routerLink="/pages/camera/cart">
+                <div class="cart__wrapper">
+                    <!-- Icon -->
+                    <span class="material-icons-outlined">
+                        shopping_cart
+                    </span>
+                    <!-- Numbers of products in cart -->
+                    <div class="productsInCart">
+                        0
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 </div>

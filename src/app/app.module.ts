@@ -9,8 +9,13 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
 import { MatTabsModule } from "@angular/material/tabs";
 
+import { FormsModule } from "@angular/forms";
+
 //shared
 import { SharedModule } from "../app/shared/shared.module";
+
+// dialog
+import { MatDialogModule } from "@angular/material/dialog";
 
 @NgModule({
   declarations: [
@@ -21,8 +26,9 @@ import { SharedModule } from "../app/shared/shared.module";
     AppRoutingModule,
     BrowserAnimationsModule,
     MatTabsModule,
-    SharedModule
-
+    SharedModule,
+    FormsModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]
