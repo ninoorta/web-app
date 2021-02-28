@@ -91,7 +91,7 @@ var routes = [
             },
             {
                 path: '',
-                redirectTo: 'home',
+                redirectTo: 'camera',
                 pathMatch: 'full',
             }
         ]

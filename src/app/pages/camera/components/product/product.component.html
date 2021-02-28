@@ -1,0 +1,78 @@
+<!-- Scanned product -->
+<div class="product">
+    <!-- header -->
+    <div class="product__header">
+        <div class="container-fluid">
+            <button routerLink="/pages/camera" class="backBtn btn material-icons"> arrow_right_alt </button>
+            <span class="product__header-title">Thông tin sản phẩm</span>
+            <button routerLink="/pages/camera/cart" class="cartBtn btn ">
+                <div class="wrapper">
+                    <!-- Icon -->
+                    <span class="material-icons-outlined">
+                        shopping_cart
+                    </span>
+                    <!-- Numbers of products in cart -->
+                    <div class="productsInCart">
+                        0
+                    </div>
+                </div>
+            </button>
+        </div>
+    </div>
+    <!-- content -->
+    <div class="container-fluid">
+        <div class="product__detail ">
+            <!-- Image of product -->
+            <div class="product__detail-image text-center">
+                <p class="detail-image__text" *ngIf="!productImage">Không có ảnh về sản phẩm này</p>
+                <img [src]="productImage" *ngIf="productImage" />
+            </div>
+            <!-- Product information -->
+            <div class="product__detail-information container">
+                <!-- product code -->
+                <p class="detail-information__code">Barcode: {{scannedCode}}</p>
+                <!-- product name -->
+                <!-- TO delete when using API -->
+                <p class="detail-">Tên sản phẩm: Banh Phong Tom Muc Indonesia</p>
+                <p class="detail-information__name" *ngIf="productName">Tên sản phẩm: {{productName}}</p>
+                <!-- product amount -->
+                <div class="detail-information__amount">
+                    <label class="detail-information__amount-title">Số lượng: </label>
+                    <span class="detail-information__amount-area">
+                        <button class="btn btn-outline-secondary subtract">-</button>
+                        <input type="number" value="1">
+                        <button class="btn btn-outline-primary add">+</button>
+                    </span>
+                </div>
+                <!-- Availability -->
+                <!-- TO ADJUST when using API -->
+                <div class="detail-information__availability">
+                    <p class="information__availability-status">
+                        Tình trạng:
+                        <span *ngIf="productAvailability && productAvailability > 0">
+                            Còn {{productAvailability}}
+                        </span>
+                        <span *ngIf="!productAvailability || productAvailability == 0" class="alert-text">Hết
+                            hàng</span>
+                    </p>
+                </div>
+                <!-- product price -->
+                <p class="detail-information__price">
+                    Giá tiền: {{productPrice}} 500000 vnd
+                </p>
+            </div>
+            <!-- Product Actions -->
+            <div class="product__detail-actions">
+                <!-- Add to cart -->
+                <button class="btn addCart btn-primary">
+                    <span class="material-icons">
+                        add_shopping_cart
+                    </span>
+                    Thêm vào giỏ hàng
+                </button>
+                <!-- Buy  -->
+                <button class="btn buyNow btn-outline-primary">Mua ngay</button>
+            </div>
+        </div>
+    </div>
+</div>

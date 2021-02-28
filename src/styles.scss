@@ -1,7 +1,8 @@
-/* You can add global styles to this file, and also import other style files */
-
 // import link scss material-icons
 @import "material-icons/iconfont/material-icons.scss";
+
+// import angular material style
+@import "@angular/material/prebuilt-themes/deeppurple-amber.css";
 
 html,
 body {
@@ -20,23 +21,15 @@ button {
   font-size: 62.5%;
 }
 
-.apexcharts-bar-area:focus {
-  fill: #ddb148;
+//   Mat menu
+.cdk-overlay-container {
+  .cdk-overlay-connected-position-bounding-box {
+    right: 0px !important;
+  }
 }
 
-.apexcharts-toolbar {
-  display: none;
-}
-
-.e-time-modal {
-  z-index: 100;
-}
-
-html,
-body {
-  height: 100%;
-}
-body {
-  margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
+.mat-tab-label-active {
+  opacity: 1 !important;
+  color: black;
+  font-weight: bold;
 }

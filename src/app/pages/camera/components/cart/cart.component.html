@@ -1,16 +1,21 @@
 <div class="cart">
-    <div class="container-fluid">
-        <!-- Back button -->
-        <div class="cart__header">
+
+    <!-- Back button -->
+    <div class="cart__header">
+        <div class="container-fluid">
             <button routerLink="/pages/camera" class="back btn material-icons"> arrow_right_alt </button>
-            <span class="title">Giỏ hàng</span>
+            <span class="cart__header-title">Giỏ hàng</span>
             <button routerLink="/pages/camera/cart/payment" class="payment btn material-icons">
                 done
             </button>
         </div>
+    </div>
 
-        <!-- In Cart -->
-        <div class="cart__body">
+    <!-- In Cart -->
+    <div class="cart__body">
+        <div class="container-fluid pt-3">
+            <!-- Title -->
+            <p class="title">Các sản phẩm trong giỏ hàng:</p>
             <!-- Products -->
             <ul class="products">
                 <li class="product">
@@ -70,8 +75,13 @@
                     </div>
                 </li>
             </ul>
-
-            <div class="cart__body-bottom">
+        </div>
+        <!-- Divider -->
+        <hr class="divider">
+        <div class="cart__body-bottom container-fluid">
+            <!-- Title -->
+            <p class="title">Tổng cộng</p>
+            <div class="wrapper">
                 <!-- Amount -->
                 <div class="amount">
                     Số lượng :
@@ -79,7 +89,7 @@
                 </div>
                 <!-- Total -->
                 <div class="total">
-                    Tổng tiền :
+                    Tổng tiền phải thanh toán :
                     <span>1.750.000</span>
                 </div>
             </div>
@@ -87,4 +97,5 @@
         </div>
 
     </div>
+
 </div>

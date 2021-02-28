@@ -3,11 +3,14 @@ import { Component, OnInit } from '@angular/core';
 import Quagga from 'quagga';
 import { BeepService } from './services/beep.service';
 
+
+import { Router } from '@angular/router';
+
 // import to open dialog
 import { MatDialog } from '@angular/material/dialog';
 
 // import product dialog
-import { ProductComponent } from './product/product.component';
+import { ProductComponent } from './components/product/product.component';
 
 
 @Component({
@@ -38,6 +41,7 @@ export class CameraComponent implements OnInit {
     private beepService: BeepService,
     public platform: Platform,
     public dialog: MatDialog,
+    private router: Router
   ) {
 
   }
@@ -84,6 +88,9 @@ export class CameraComponent implements OnInit {
 
               // if successful open dialog showing product information
               // this.dialog.open(ProductComponent)
+
+              Quagga.stop();
+              this.router.navigateByUrl(`/pages/camera/product/${this.scannedCode}`)
 
             })
           }

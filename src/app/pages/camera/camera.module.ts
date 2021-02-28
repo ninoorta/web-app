@@ -8,13 +8,14 @@ import { MatDialogModule } from '@angular/material/dialog';
 
 
 import { CameraComponent } from './camera.component';
-import { ProductComponent } from './product/product.component';
+import { ProductComponent } from './components/product/product.component';
 
-import { CartComponent } from './cart/cart.component';
-import { PaymentComponent } from './payment/payment.component';
+import { CartComponent } from './components/cart/cart.component';
+import { PaymentComponent } from './components/payment/payment.component';
+import { DoneComponent } from './components/done/done.component';
 
 @NgModule({
-  declarations: [CameraComponent, ProductComponent, CartComponent, PaymentComponent],
+  declarations: [CameraComponent, ProductComponent, CartComponent, PaymentComponent, DoneComponent],
   imports: [
     CommonModule,
     SharedModule,

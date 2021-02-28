@@ -1,125 +1,33 @@
 .camera {
+  height: 100%;
+  // Temp background color
+  background-color: black;
+
   .viewport::ng-deep video {
     width: 100%;
     height: 240px;
     object-fit: cover;
+    // temp border color
+    border: 5px solid white;
   }
 
   .viewport {
     position: relative;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    height: 85%;
+    justify-content: center;
+
     .drawingBuffer {
       position: absolute;
       content: "";
     }
   }
 
-  .product {
-    margin-top: 3rem;
-    position: relative;
-
-    .cart {
-      position: absolute;
-      content: "";
-      top: 50%;
-      right: 0;
-      z-index: 3;
-
-      &__wrapper {
-        position: relative;
-
-        .productsInCart {
-          position: absolute;
-          content: "";
-          top: bottom;
-          bottom: 16px;
-          left: -10px;
-          background: #4fb68d;
-          color: #fff;
-          border-radius: 50%;
-          padding: 6px;
-          line-height: 6px;
-          z-index: 3;
-        }
-      }
-    }
-
-    &__detail {
-      &-image {
-        width: 12rem;
-        height: 12rem;
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-        position: relative;
-        background: #fafafa;
-        border-radius: 50%;
-
-        .detail-image__text {
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%, -50%);
-        }
-      }
-
-      &-information {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        .detail-information {
-          &__code {
-            margin-top: 1rem;
-          }
-
-          &__name {
-          }
-
-          &__amount {
-            &-title {
-              margin-right: 10px;
-            }
-            &-area {
-              input {
-                width: 25px;
-                height: 25px;
-                outline: none;
-                border: none;
-                border-bottom: 0.5px solid #cecece;
-                text-align: center;
-              }
-
-              .subtract {
-                display: inline-flex;
-                align-items: center;
-                margin-right: 5px;
-                font-size: 20px;
-                height: 25px;
-                border: none;
-                outline: none;
-              }
-
-              .add {
-                @extend .subtract;
-                margin-left: 5px;
-              }
-            }
-          }
-        }
-      }
-
-      &-actions {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-
-        .addCart {
-          margin-right: 10px;
-        }
-      }
-    }
+  .notice {
+    color: white;
+    font-weight: bold;
+    margin-top: 1rem;
   }
-}
-
-.alert-text {
-  color: red;
 }

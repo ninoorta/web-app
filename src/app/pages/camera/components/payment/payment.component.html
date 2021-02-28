@@ -1,0 +1,203 @@
+<div class="payment">
+    <!-- Header -->
+    <div class="payment__header">
+        <div class="container-fluid">
+            <button routerLink="/pages/camera/cart" class="back btn material-icons"> arrow_right_alt </button>
+            <span class="payment__header-title">Thanh toán</span>
+            <button routerLink="/pages/camera" class="closePayment btn material-icons">close</button>
+        </div>
+    </div>
+
+    <!-- Methods -->
+    <div class="methods">
+        <div class="container-fluid">
+            <!-- Option -->
+            <div class="methods__option">
+                <!-- Thanh toan truc tiep tai cua hang -->
+                <div class="methods__option-title" *ngIf="isDirect">
+                    Trực tiếp tại cửa hàng
+                    <button class="changeOption" (click)="changeOption()">Thay đổi</button>
+                </div>
+                <div class="methods__option-title" *ngIf="!isDirect">
+                    Giao hàng tận nơi
+                    <button class="changeOption" (click)="changeOption()">Thay đổi</button>
+                </div>
+
+                <div class="guide" *ngIf="isDirect">
+                    <div class="guide__title">Hướng dẫn thanh toán</div>
+                    <div class="guide__content">
+                        Bạn hãy đọc cho nhân viên cửa hàng mã đơn hàng này : xxxxxxxx
+
+                    </div>
+                </div>
+
+                <!-- Shipping -->
+                <div class="address" *ngIf="isShipping">
+                    <div class="container">
+                        <div class="row">
+                            <!-- Map icon -->
+                            <div class="col-2 map-col">
+                                <span class="material-icons">
+                                    place
+                                </span>
+                            </div>
+                            <!-- Address -->
+                            <div class="col-10 address-col">
+                                <label class="address__title">
+                                    Giao đến địa chỉ:
+                                    <span *ngIf="addressError" class="errorText">{{(addressError)}}</span>
+                                </label>
+                                <textarea type="text" class="addressInput" [(ngModel)]="addressInput"
+                                    placeholder="Thôn x, Xã y, Phường z"></textarea>
+                            </div>
+                            <!-- Note -->
+                            <div class="col-12 address-note">
+                                <!-- title -->
+                                <div class="address-note__title">
+                                    Yêu cầu thêm
+                                </div>
+                                <input type="text" placeholder="Ví dụ: Chỉ nhận hàng vào buổi chiều"
+                                    [(ngModel)]="addressNote">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Recipient information when customer selects shipping -->
+    <div class="recipient" *ngIf="isShipping">
+        <div class="container-fluid">
+            <div class="recipient__title">
+                Thông tin người nhận
+            </div>
+            <!-- Name -->
+            <div class="recipient__name">
+                <label class="recipient__name-title">
+                    Người nhận
+                    <span *ngIf="nameError" class="errorText">{{(nameError)}}</span>
+                </label>
+                <input type="text" class="recipientName" [(ngModel)]="recipientName"
+                    placeholder="Nhập tên người nhận tại đây">
+            </div>
+            <!-- Phone number -->
+            <div class="recipient__phone">
+                <label class="recipient__phone-title">
+                    Số điện thoại
+                    <span *ngIf="phoneError" class="errorText">{{(phoneError)}}</span>
+
+                </label>
+                <input type="text" class="recipientPhone" [(ngModel)]="recipientPhone"
+                    placeholder="Bấm vào để nhập số điện thoại">
+            </div>
+        </div>
+    </div>
+
+    <!-- Cash -->
+    <div class="cash" *ngIf="isShipping">
+        <div class="container-fluid">
+            <!-- title -->
+            <div class="cash__title">Thanh toán</div>
+            <!-- ways -->
+            <form class="cash__ways">
+                <div class="cash__ways-direct">
+                    <input type="radio" name="option" (change)="chooseMethod(1)" value="cash" checked="true">
+                    <!-- icon -->
+                    <span class="material-icons cash__ways-icon">
+                        attach_money
+                    </span>
+                    <label for="cash">
+                        Tiền mặt
+                    </label>
+                </div>
+                <div class="cash__ways-transfer">
+                    <input type="radio" name="option" (change)="chooseMethod(2)" value="transfer">
+                    <!-- icon -->
+                    <span class="material-icons-outlined cash__ways-icon">
+                        account_balance_wallet
+                    </span>
+                    <label class="">
+                        Chuyển khoản đến STK BIDV 12110000443633
+                        <!-- BIDV CN Hai Bà Trưng, HN -->
+                    </label>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Cart Information -->
+    <div class="cart-information">
+        <div class="container-fluid">
+            <div class="row align-items-center">
+                <!-- Information -->
+                <div class="col-6">
+                    <p class="goods">
+                        {{numberOfGoods}} món trong giỏ hàng
+                    </p>
+                    <p class="total">
+                        {{totalMoney}}đ
+                    </p>
+                </div>
+                <!-- Finish payment -->
+                <div class="col-6">
+                    <div class="wrapper">
+                        <!-- <button *ngIf="isDirect"  class="finishBtn">Đ</button> -->
+                        <!-- routerLink="/pages/camera/cart/payment/done" -->
+                        <button *ngIf="isShipping" class="finishBtn" (click)="checkData()">
+                            Đặt hàng
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Dialog opens when click change button -->
+    <div class="changeContent closedContent">
+        <div class="container-fluid">
+            <!-- Header -->
+            <div class="header">
+                <button id="changeContentBtn" class="header__close btn material-icons"
+                    (click)="closeChange()">close</button>
+            </div>
+
+            <!-- Content -->
+            <div class="content">
+                <!-- Title -->
+                <div class="content__title">
+                    <!-- Icon -->
+                    <span class="material-icons">
+                        receipt_long
+                    </span>
+                    <h3 class="content__title-heading">Chọn phương thức thanh toán</h3>
+                </div>
+
+                <!-- Options -->
+                <div class="content__options">
+                    <div class="option shipping" (click)="clickChange($event)">
+                        <!-- Icon -->
+                        <span class="material-icons shipping">
+                            delivery_dining
+                        </span>
+                        <h4 class="option__heading shipping">Giao tận nơi</h4>
+                        <div class="option__text shipping">
+                            Đồ bạn lựa chọn sẽ được giao đến địa chỉ của bạn
+                        </div>
+                    </div>
+                    <div class="option direct" (click)="clickChange($event)">
+                        <!-- Icon -->
+                        <span class="material-icons direct">
+                            store
+                        </span>
+                        <h4 class="option__heading direct">Tại cửa hàng</h4>
+                        <div class="option__text direct">
+                            Bạn chỉ cần đưa mã giỏ hàng cho nhân viên
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

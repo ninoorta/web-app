@@ -1,0 +1,121 @@
+// Cart
+
+.cart {
+  position: relative;
+  background-color: #9e9e9e0f;
+  height: 100%;
+
+  .divider {
+    border: none;
+    background-color: #9e9e9e0f;
+  }
+
+  .title {
+    font-size: 1.5rem;
+    font-weight: 500;
+    position: relative;
+    padding-bottom: 0.5rem;
+
+    &:after {
+      position: absolute;
+      content: "";
+      width: 115%;
+      height: 0.5px;
+      background-color: #e1e1e1;
+      bottom: -5px;
+      left: -20px;
+    }
+  }
+
+  .container-fluid {
+    background-color: white;
+  }
+  &__header {
+    border-bottom: 1.5px solid #cecece;
+
+    .container-fluid {
+      display: flex;
+      justify-content: center;
+    }
+
+    .back {
+      transform: rotate(180deg);
+      font-size: 2rem;
+      position: absolute;
+      content: "";
+      left: 0;
+      font-weight: bold;
+    }
+
+    .payment {
+      font-size: 2rem;
+      position: absolute;
+      content: "";
+      right: 0;
+      color: black;
+      font-weight: bold;
+    }
+
+    &-title {
+      font-size: 2rem;
+      padding: 0.375rem 0;
+    }
+  }
+
+  &__body {
+    .products {
+      overflow-y: auto;
+      overflow-x: hidden;
+      padding: 0 0 2rem 0;
+      .product {
+        font-size: 1.2rem;
+        margin-top: 0.5rem;
+        list-style: none;
+        border-bottom: solid #cecece;
+        border-bottom-width: thin;
+        padding: 0.75rem 0;
+
+        .col-2 {
+          padding: 0;
+          span {
+            float: right;
+            font-size: 18px;
+          }
+        }
+        &__amount {
+          display: inline-flex;
+          align-items: center;
+          margin-left: 15px;
+
+          label {
+            margin-bottom: 0;
+          }
+          input {
+            width: 25px;
+            border: none;
+          }
+        }
+      }
+    }
+
+    &-bottom {
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+      font-size: 1.2rem;
+
+      .wrapper {
+        padding: 0.5rem 0;
+
+        .amount {
+          margin-bottom: 1rem;
+          border-bottom: 0.75px solid #cecece;
+          padding-bottom: 1rem;
+        }
+
+        .total {
+          font-weight: 500;
+        }
+      }
+    }
+  }
+}
