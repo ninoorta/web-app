@@ -24,6 +24,9 @@ export class ProfileComponent implements OnInit {
   email: string;
 
 
+  // Report
+  totalSpentMoney: number;
+
 
 
 

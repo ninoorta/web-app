@@ -44,83 +44,79 @@
                 </ng-template>
                 <!-- Thông tin -->
                 <div class="information">
-                    <div class="container-fluid">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-4 input-text">
-                                    Họ:
-                                </div>
-                                <div class="col-8">
-                                    <input class="input" type="text" [(ngModel)]="firstName" style="cursor: pointer;"
-                                        [readonly]="!isEdit" />
-                                </div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-4 input-text">
+                                Họ:
                             </div>
-                            <div class="row">
-                                <div class="col-4 input-text">
-                                    Tên:
-                                </div>
-                                <div class="col-8">
-                                    <input class="input" type="text" [(ngModel)]="lastName" style="cursor: pointer;"
-                                        [readonly]="!isEdit" />
-                                </div>
+                            <div class="col-8">
+                                <input class="input" type="text" [(ngModel)]="firstName" style="cursor: pointer;"
+                                    [readonly]="!isEdit" />
                             </div>
-                            <div class="row">
-                                <div class="col-4 input-text">
-                                    Giới tính:
-                                </div>
-                                <div class="col-8">
-                                    <form class="gender__form">
-                                        <label class="gender__form-label">
-                                            Nam
-                                            <input type="radio" name="gender" value="male" class="gender gender-male"
-                                                style="color: #224177;" (change)="chooseGenderType(1)"
-                                                [checked]="gender == 1" [disabled]="!isEdit" />
-                                            <br />
-                                        </label>
-                                        <label class="gender__form-label">
-                                            Nữ
-                                            <input type="radio" name="gender" value="female"
-                                                class="gender gender-female" style="color: #224177;"
-                                                (change)="chooseGenderType(2)" [checked]="gender == 2"
-                                                [disabled]="!isEdit" />
-                                            <br />
-                                        </label>
-                                    </form>
-                                </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4 input-text">
+                                Tên:
                             </div>
-                            <div class="row">
-                                <div class="col-4 input-text">
-                                    Ngày sinh:
-                                </div>
-                                <div class="col-8">
-                                    <input class="input" type="date" [(ngModel)]="birthday" [readonly]="!isEdit">
-                                </div>
+                            <div class="col-8">
+                                <input class="input" type="text" [(ngModel)]="lastName" style="cursor: pointer;"
+                                    [readonly]="!isEdit" />
                             </div>
-                            <div class="row">
-                                <div class="col-4 input-text">
-                                    Điện thoại:
-                                </div>
-                                <div class="col-8">
-                                    <input type="text" class="input" [(ngModel)]="phone" [readonly]="!isEdit">
-                                </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4 input-text">
+                                Giới tính:
                             </div>
-                            <div class="row">
-                                <div class="col-4 input-text">
-                                    Địa chỉ:
-                                </div>
-                                <div class="col-8">
-                                    <input type="text" class="input profile-address" [(ngModel)]="address"
-                                        [readonly]="!isEdit">
-                                </div>
+                            <div class="col-8">
+                                <form class="gender__form">
+                                    <label class="gender__form-label">
+                                        Nam
+                                        <input type="radio" name="gender" value="male" class="gender gender-male"
+                                            style="color: #224177;" (change)="chooseGenderType(1)"
+                                            [checked]="gender == 1" [disabled]="!isEdit" />
+                                        <br />
+                                    </label>
+                                    <label class="gender__form-label">
+                                        Nữ
+                                        <input type="radio" name="gender" value="female" class="gender gender-female"
+                                            style="color: #224177;" (change)="chooseGenderType(2)"
+                                            [checked]="gender == 2" [disabled]="!isEdit" />
+                                        <br />
+                                    </label>
+                                </form>
                             </div>
-                            <div class="row">
-                                <div class="col-4 input-text">
-                                    Email:
-                                </div>
-                                <div class="col-8">
-                                    <input type="text" class="input profile-gmail" [(ngModel)]="email"
-                                        [readonly]="!isEdit">
-                                </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4 input-text">
+                                Ngày sinh:
+                            </div>
+                            <div class="col-8">
+                                <input class="input" type="date" [(ngModel)]="birthday" [readonly]="!isEdit">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4 input-text">
+                                Điện thoại:
+                            </div>
+                            <div class="col-8">
+                                <input type="text" class="input" [(ngModel)]="phone" [readonly]="!isEdit">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4 input-text">
+                                Địa chỉ:
+                            </div>
+                            <div class="col-8">
+                                <input type="text" class="input profile-address" [(ngModel)]="address"
+                                    [readonly]="!isEdit">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4 input-text">
+                                Email:
+                            </div>
+                            <div class="col-8">
+                                <input type="text" class="input profile-gmail" [(ngModel)]="email" [readonly]="!isEdit">
                             </div>
                         </div>
                     </div>
@@ -145,7 +141,13 @@
                 </ng-template>
                 <!-- Thống kê -->
                 <div class="report">
-
+                    <div class="container">
+                        <!-- Total spent money -->
+                        <p class="report__total">
+                            Tổng tiền bạn đã mua sắm:
+                            <span>{{totalSpentMoney}}</span>
+                        </p>
+                    </div>
                 </div>
             </mat-tab>
         </mat-tab-group>

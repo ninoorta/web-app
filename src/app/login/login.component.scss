@@ -1,0 +1,98 @@
+// Login
+.login {
+  height: 100%;
+  display: flex;
+  align-items: center;
+
+  .logo {
+  }
+
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .login__form {
+      margin: 2rem 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      &-title {
+        margin-bottom: 1.5rem;
+      }
+      .input__wrapper {
+        width: 100%;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .material-icons {
+          position: absolute;
+          content: "";
+          left: 45px;
+          color: #c8ccd1;
+        }
+
+        .phone {
+          width: 80%;
+          border-radius: 20px;
+          padding: 0.85rem;
+          padding-left: 4rem;
+          outline: none;
+          border: 1px solid #ced6e1;
+          font-size: 14px;
+        }
+      }
+
+      .password {
+        width: 80%;
+        border-radius: 20px;
+        padding: 0.85rem;
+        padding-left: 4rem;
+        outline: none;
+        border: 1px solid #ced6e1;
+        font-size: 14px;
+        margin-top: 1rem;
+      }
+    }
+
+    .otpBtn {
+      border: 1px solid black;
+      border-radius: 10px;
+      padding: 0.5rem 1rem;
+      font-size: 14px;
+    }
+
+    .signBtn {
+      @extend .otpBtn;
+    }
+
+    .divider-text {
+      font-weight: 500;
+      margin: 1rem 0;
+      font-size: 13px;
+    }
+
+    a {
+      text-decoration: underline;
+    }
+
+    .passLogin {
+      font-size: 14px;
+      margin-bottom: 1rem;
+    }
+
+    .otpLogin {
+      @extend .passLogin;
+    }
+
+    .forgetPass {
+      @extend .passLogin;
+    }
+
+    .register {
+      @extend .passLogin;
+    }
+  }
+}

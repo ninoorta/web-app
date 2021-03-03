@@ -18,6 +18,7 @@ import { MatIconModule } from "@angular/material/icon";
 import { MatMenuModule } from "@angular/material/menu";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 
+
 // --
 
 
@@ -56,7 +57,8 @@ import { MatDialogModule } from "@angular/material/dialog";
     MatMenuModule,
     MatButtonModule,
     MatIconModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+
 
   ],
   providers: [

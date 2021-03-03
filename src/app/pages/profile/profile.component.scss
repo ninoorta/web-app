@@ -78,7 +78,7 @@
   }
 
   .information {
-    margin-top: 2rem;
+    margin-top: 1rem;
     .row {
       margin: 1em 0em;
       width: 100%;
@@ -130,5 +130,16 @@
         }
       }
     }
+  }
+
+  .report {
+    &__total {
+      font-size: 15pxss;
+    }
+  }
+
+  mat-tab-group {
+    margin-top: 1rem;
+    padding: 0 15px;
   }
 }
