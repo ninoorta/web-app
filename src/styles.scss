@@ -33,3 +33,53 @@ button {
   color: black;
   font-weight: bold;
 }
+
+.success {
+  background-color: #d5e7f7;
+  color: white;
+  font-weight: bold;
+  text-align: center;
+  min-width: 200px;
+  border-radius: 2px;
+  // padding: 10px;
+  // position: fixed;
+  // z-index: 1;
+  // opacity: 0;
+  // top: 0;
+  // right: 0;
+  // animation: notiShow 2s;
+}
+
+@keyframes notiShow {
+  0% {
+    right: -5rem;
+    top: 0px;
+    opacity: 0;
+  }
+  25% {
+    right: -5rem;
+    top: 0px;
+    opacity: 0.8;
+  }
+  50% {
+    right: -5rem;
+    top: 0px;
+    opacity: 0.9;
+  }
+  65% {
+    right: -5rem;
+    top: 0px;
+    opacity: 0.8;
+  }
+  75% {
+    right: 0rem;
+    top: 0px;
+    opacity: 0.5;
+  }
+  100% {
+    right: 0em;
+    top: 0px;
+    opacity: 0;
+    display: none;
+  }
+}

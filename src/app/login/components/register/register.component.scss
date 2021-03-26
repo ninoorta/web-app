@@ -10,10 +10,20 @@
     align-items: center;
   }
 
+  .error-text {
+    color: red;
+    font-size: 13px;
+    margin-top: 2rem;
+    margin-bottom: 0;
+    display: block;
+    width: 100%;
+  }
+
   &__header {
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: white;
 
     border-bottom: 1.5px solid #cecece;
     box-shadow: 0px -2px 3px 5px #cec8c8c2;
@@ -34,7 +44,10 @@
   }
 
   &__form {
-    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
     &-input {
       width: 100%;
       border: 1px solid #ced6e1;

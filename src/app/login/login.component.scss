@@ -17,6 +17,13 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+
+      .error-text {
+        color: red;
+        font-size: 13px;
+        margin: 0 20px 0.5rem 20px;
+      }
+
       &-title {
         margin-bottom: 1.5rem;
       }
@@ -30,30 +37,23 @@
         .material-icons {
           position: absolute;
           content: "";
-          left: 45px;
+          left: 15px;
           color: #c8ccd1;
         }
 
-        .phone {
-          width: 80%;
+        .email {
+          width: 100%;
           border-radius: 20px;
           padding: 0.85rem;
-          padding-left: 4rem;
+          padding-left: 5rem;
           outline: none;
           border: 1px solid #ced6e1;
           font-size: 14px;
+          margin: 0.5rem 0;
         }
-      }
-
-      .password {
-        width: 80%;
-        border-radius: 20px;
-        padding: 0.85rem;
-        padding-left: 4rem;
-        outline: none;
-        border: 1px solid #ced6e1;
-        font-size: 14px;
-        margin-top: 1rem;
+        .password {
+          @extend .email;
+        }
       }
     }
 
@@ -66,6 +66,7 @@
 
     .signBtn {
       @extend .otpBtn;
+      margin-top: 1rem;
     }
 
     .divider-text {
@@ -78,21 +79,13 @@
       text-decoration: underline;
     }
 
-    .passLogin {
-      font-size: 14px;
-      margin-bottom: 1rem;
-    }
-
-    .otpLogin {
-      @extend .passLogin;
-    }
-
     .forgetPass {
-      @extend .passLogin;
+      font-size: 14px;
+      margin-top: 2rem;
     }
 
     .register {
-      @extend .passLogin;
+      @extend .forgetPass;
     }
   }
 }

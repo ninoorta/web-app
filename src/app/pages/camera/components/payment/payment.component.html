@@ -18,6 +18,7 @@
                     Trực tiếp tại cửa hàng
                     <button class="changeOption" (click)="changeOption()">Thay đổi</button>
                 </div>
+
                 <div class="methods__option-title" *ngIf="!isDirect">
                     Giao hàng tận nơi
                     <button class="changeOption" (click)="changeOption()">Thay đổi</button>
@@ -26,10 +27,10 @@
                 <div class="guide" *ngIf="isDirect">
                     <div class="guide__title">Hướng dẫn thanh toán</div>
                     <div class="guide__content">
-                        Bạn hãy đọc cho nhân viên cửa hàng mã đơn hàng này : xxxxxxxx
-
+                        Khi đến, bạn hãy đọc cho nhân viên cửa hàng mã đơn hàng này : xxxxxxxx
                     </div>
                 </div>
+
 
                 <!-- Shipping -->
                 <div class="address" *ngIf="isShipping">
@@ -66,6 +67,35 @@
         </div>
     </div>
 
+    <!-- Select store -->
+    <div class="store__options" *ngIf="isDirect">
+        <div class="container">
+            <div class="store__options-title">
+                Chọn một cửa hàng gần nhất mà bạn muốn đến để thanh toán và nhận đồ:
+            </div>
+            <!-- alert if -->
+            <p class="errorText">{{selectStoreErr}}</p>
+            <!-- select store -->
+            <div class="wrapper">
+                <div class="select-store" *ngFor="let store of storesToChoose">
+                    <input type="checkbox" id="{{store.id}}">
+                    <label for="{{store.id}}" class="select-store__label" (click)="changeStore($event)"></label>
+                    <div class="icon">
+                        <span class="material-icons">store</span>
+                        <p style="margin: 0">
+                            {{store.ten}} - {{store.address}}
+                        </p>
+                    </div>
+                </div>
+                <!-- extra fee select -->
+                <div class="extra" *ngIf="selectStoreErr">
+                    <input type="checkbox" id="extra">
+                    <label for="extra" (click)="acceptExtra($event)"></label>
+                    <span>Nếu bạn vẫn muốn nhận tại cửa hàng đã chọn, bạn phải trả thêm tiền phí </span>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- Recipient information when customer selects shipping -->
     <div class="recipient" *ngIf="isShipping">
         <div class="container-fluid">
@@ -86,7 +116,6 @@
                 <label class="recipient__phone-title">
                     Số điện thoại
                     <span *ngIf="phoneError" class="errorText">{{(phoneError)}}</span>
-
                 </label>
                 <input type="text" class="recipientPhone" [(ngModel)]="recipientPhone"
                     placeholder="Bấm vào để nhập số điện thoại">
@@ -102,25 +131,29 @@
             <!-- ways -->
             <form class="cash__ways">
                 <div class="cash__ways-direct">
-                    <input type="radio" name="option" (change)="chooseMethod(1)" value="cash" checked="true">
+                    <input type="checkbox" id="option1" name="option" (change)="chooseMethod(1, $event)" value="cash"
+                        checked="true">
+                    <label for="option1" class="option-label"></label>
                     <!-- icon -->
                     <span class="material-icons cash__ways-icon">
                         attach_money
                     </span>
-                    <label for="cash">
+                    <span class="option-title">
                         Tiền mặt
-                    </label>
+                    </span>
                 </div>
                 <div class="cash__ways-transfer">
-                    <input type="radio" name="option" (change)="chooseMethod(2)" value="transfer">
+                    <input type="checkbox" id="option2" name="option" (change)="chooseMethod(2, $event)"
+                        value="transfer">
+                    <label for="option2" class="option-label"></label>
                     <!-- icon -->
                     <span class="material-icons-outlined cash__ways-icon">
                         account_balance_wallet
                     </span>
-                    <label class="">
+                    <span class="option-title">
                         Chuyển khoản đến STK BIDV 12110000443633
                         <!-- BIDV CN Hai Bà Trưng, HN -->
-                    </label>
+                    </span>
                 </div>
             </form>
         </div>
@@ -133,10 +166,10 @@
                 <!-- Information -->
                 <div class="col-6">
                     <p class="goods">
-                        {{numberOfGoods}} món trong giỏ hàng
+                        {{totalProducts}} món trong giỏ hàng
                     </p>
                     <p class="total">
-                        {{totalMoney}}đ
+                        {{totalMoneyToShow}}
                     </p>
                 </div>
                 <!-- Finish payment -->
@@ -144,8 +177,12 @@
                     <div class="wrapper">
                         <!-- <button *ngIf="isDirect"  class="finishBtn">Đ</button> -->
                         <!-- routerLink="/pages/camera/cart/payment/done" -->
-                        <button *ngIf="isShipping" class="finishBtn" (click)="checkData()">
+                        <button *ngIf="isShipping" class="finishBtn" (click)="checkData()" [disabled]="!isDone">
                             Đặt hàng
+                        </button>
+                        <button *ngIf="!isShipping" class="finishBtn" (click)="checkToCreateOrder()"
+                            [disabled]="!isDone">
+                            Xác nhận
                         </button>
                     </div>
                 </div>

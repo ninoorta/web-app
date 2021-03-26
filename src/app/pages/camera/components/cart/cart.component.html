@@ -3,9 +3,9 @@
     <!-- Back button -->
     <div class="cart__header">
         <div class="container-fluid">
-            <button routerLink="/pages/camera" class="back btn material-icons"> arrow_right_alt </button>
+            <button (click)="goBack()" class="back btn material-icons"> arrow_right_alt </button>
             <span class="cart__header-title">Giỏ hàng</span>
-            <button routerLink="/pages/camera/cart/payment" class="payment btn material-icons">
+            <button (click)="goToPayment()" class="payment btn material-icons">
                 done
             </button>
         </div>
@@ -18,62 +18,88 @@
             <p class="title">Các sản phẩm trong giỏ hàng:</p>
             <!-- Products -->
             <ul class="products">
-                <li class="product">
+                <li class="product" *ngFor="let product of products; let i = index">
+                    <div class="container">
+                        <div class="row align-items-center">
+                            <div class="col-7 d-flex align-items-center" style="padding: 0;">
+                                <div class="product__name">
+                                    {{product.name}}
+                                </div>
+                            </div>
+                            <div class="col-1">
+                                <div class="product__amount">
+                                    <label>x</label>
+                                    <input type="number" min="1" max="999" [(ngModel)]="product.amount"
+                                        (ngModelChange)="changeAmount($event, i)">
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="product__price">
+                                    {{product.priceToShow}}
+                                </div>
+                            </div>
+                            <div class="col-1">
+                                <span class="deleteBtn material-icons-outlined" (click)="deleteItemWhenClick(i)">
+                                    delete
+                                </span>
+                            </div>
+                        </div>
+                        <div class="row align-items-center">
+                            <p class="error-text" id="product{{i}}"></p>
+                        </div>
+                    </div>
+                </li>
+                <!-- <li class="product" id="1">
                     <div class="container">
                         <div class="row align-items-center">
                             <div class="col-8 d-flex align-items-center" style="padding: 0;">
-                                <!-- name -->
                                 <div class="product__name">
                                     Bo luc lac
                                 </div>
-                                <!-- amount -->
                                 <div class="product__amount">
                                     <label>x</label>
                                     <input type="number" placeholder="1">
                                 </div>
                             </div>
-                            <!-- price -->
                             <div class="col-2">
                                 <div class="product__price">
                                     19.000vnd
                                 </div>
                             </div>
                             <div class="col-2">
-                                <span class="material-icons-outlined">
+                                <span class="deleteBtn material-icons-outlined" (click)="deleteItemWhenClick()">
                                     delete
                                 </span>
                             </div>
                         </div>
                     </div>
                 </li>
-                <li class="product">
+                <li class="product" id="2">
                     <div class="container">
                         <div class="row align-items-center">
                             <div class="col-8 d-flex align-items-center" style="padding: 0;">
-                                <!-- name -->
                                 <div class="product__name">
                                     Bo luc lac
                                 </div>
-                                <!-- amount -->
                                 <div class="product__amount">
                                     <label>x</label>
                                     <input type="number" placeholder="1">
                                 </div>
                             </div>
-                            <!-- price -->
                             <div class="col-2">
                                 <div class="product__price">
                                     19.000vnd
                                 </div>
                             </div>
                             <div class="col-2">
-                                <span class="material-icons-outlined">
+                                <span class="deleteBtn material-icons-outlined" (click)="deleteItemWhenClick()">
                                     delete
                                 </span>
                             </div>
                         </div>
                     </div>
-                </li>
+                </li> -->
+
             </ul>
         </div>
         <!-- Divider -->
@@ -85,12 +111,12 @@
                 <!-- Amount -->
                 <div class="amount">
                     Số lượng :
-                    <span>2</span>
+                    <span>{{totalProducts}}</span>
                 </div>
                 <!-- Total -->
                 <div class="total">
                     Tổng tiền phải thanh toán :
-                    <span>1.750.000</span>
+                    <span>{{totalMoneyToShow}}</span>
                 </div>
             </div>
 

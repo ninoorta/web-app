@@ -15,22 +15,21 @@
                 <button (click)="logOut()" mat-menu-item class="matMenu-actions__logOut">
                     Đăng xuất
                 </button>
-                <button mat-menu-item routerLink="change-pass">Đổi mật khẩu</button>
             </mat-menu>
         </div>
         <!-- Avatar -->
         <div class="row">
             <div class="col text-center">
                 <div class="avatar">
-                    <p class="avatar__notice" *ngIf="!userAvatarString">Chưa có ảnh đại diện</p>
-                    <img [src]="userAvatarString" *ngIf="userAvatarString" />
+                    <p class="avatar__notice" *ngIf="!userAvatarLink">Chưa có ảnh đại diện</p>
+                    <img [src]="userAvatarLink" *ngIf="userAvatarLink" />
                     <label for="userAvatar">
                         <span class="material-icons">
                             add_a_photo
                         </span>
                     </label>
-                    <input #userAvatar type="file" accept="image/*" id="userAvatar"
-                        (change)="userChangeAvatar(userAvatar.files)" hidden />
+                    <input #userAvatar type="file" accept="image/*" id="userAvatar" (change)="userChangeAvatar($event)"
+                        hidden />
                 </div>
             </div>
         </div>
@@ -47,19 +46,10 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-4 input-text">
-                                Họ:
+                                Họ tên:
                             </div>
                             <div class="col-8">
-                                <input class="input" type="text" [(ngModel)]="firstName" style="cursor: pointer;"
-                                    [readonly]="!isEdit" />
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-4 input-text">
-                                Tên:
-                            </div>
-                            <div class="col-8">
-                                <input class="input" type="text" [(ngModel)]="lastName" style="cursor: pointer;"
+                                <input class="input" type="text" [(ngModel)]="fullName" style="cursor: pointer;"
                                     [readonly]="!isEdit" />
                             </div>
                         </div>
@@ -120,17 +110,6 @@
                             </div>
                         </div>
                     </div>
-                    <!-- Ho -->
-
-                    <!-- Ten -->
-
-                    <!-- Gioi tinh -->
-
-                    <!-- Ngay sinh -->
-
-                    <!-- So dien thoai -->
-
-                    <!-- Dia chi -->
                 </div>
             </mat-tab>
             <mat-tab label="Thống kê">
@@ -152,5 +131,26 @@
             </mat-tab>
         </mat-tab-group>
 
+    </div>
+
+
+    <!-- Overlay show signIn signUp -->
+    <div class="overlaySign" *ngIf="!currentUser">
+        <div class="container">
+            <div class="wrapper">
+                <!-- Title -->
+                <h3 class="overlaySign__title">
+                    Bạn cần đăng nhập để sử dụng chức năng này
+                </h3>
+                <div class="action__wrapper">
+                    <button class="signInBtn actionBtn" routerLink="/login">Đăng nhập</button>
+                </div>
+                <!-- Register route -->
+                <p class="register__wrapper">
+                    Bạn chưa có tài khoản?
+                    <a class="register" routerLink="/login/register">Đăng ký</a>
+                </p>
+            </div>
+        </div>
     </div>
 </div>

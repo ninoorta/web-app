@@ -86,7 +86,7 @@ var routes = [
             },
             {
                 path: 'profile',
-                loadChildren: function () { return __webpack_require__.e(/*! import() | profile-profile-module */ "profile-profile-module").then(__webpack_require__.bind(null, /*! ./profile/profile.module */ "723k"))
+                loadChildren: function () { return Promise.all(/*! import() | profile-profile-module */[__webpack_require__.e("default~login-login-module~profile-profile-module"), __webpack_require__.e("profile-profile-module")]).then(__webpack_require__.bind(null, /*! ./profile/profile.module */ "723k"))
                     .then(function (m) { return m.ProfileModule; }); }
             },
             {

@@ -5,7 +5,7 @@
         <div class="container-fluid">
             <button routerLink="/pages/camera" class="backBtn btn material-icons"> arrow_right_alt </button>
             <span class="product__header-title">Thông tin sản phẩm</span>
-            <button routerLink="/pages/camera/cart" class="cartBtn btn ">
+            <button class="cartBtn btn " (click)="moveToCart()">
                 <div class="wrapper">
                     <!-- Icon -->
                     <span class="material-icons-outlined">
@@ -13,15 +13,15 @@
                     </span>
                     <!-- Numbers of products in cart -->
                     <div class="productsInCart">
-                        0
+                        {{(productsInCart)}}
                     </div>
                 </div>
             </button>
         </div>
     </div>
     <!-- content -->
-    <div class="container-fluid">
-        <div class="product__detail ">
+    <div class="product__detail ">
+        <div class="container-fluid">
             <!-- Image of product -->
             <div class="product__detail-image text-center">
                 <p class="detail-image__text" *ngIf="!productImage">Không có ảnh về sản phẩm này</p>
@@ -33,19 +33,31 @@
                 <p class="detail-information__code">Barcode: {{scannedCode}}</p>
                 <!-- product name -->
                 <!-- TO delete when using API -->
-                <p class="detail-">Tên sản phẩm: Banh Phong Tom Muc Indonesia</p>
-                <p class="detail-information__name" *ngIf="productName">Tên sản phẩm: {{productName}}</p>
+                <!-- <p class="detail-">Tên sản phẩm: Banh Phong Tom Muc Indonesia</p> -->
+                <p class="detail-information__name">
+                    Tên sản phẩm:
+                    <span>
+                        {{(productName)}}
+                    </span>
+                    <span *ngIf="!productName">
+                        Hiện sản phẩm không được phân phối tại cửa hàng
+                    </span>
+                </p>
                 <!-- product amount -->
                 <div class="detail-information__amount">
                     <label class="detail-information__amount-title">Số lượng: </label>
                     <span class="detail-information__amount-area">
-                        <button class="btn btn-outline-secondary subtract">-</button>
-                        <input type="number" value="1">
-                        <button class="btn btn-outline-primary add">+</button>
+                        <button class="btn btn-outline-secondary subtract material-icons" (click)="subtractProduct()"
+                            [disabled]="productAvailability < 1 ? true : false">remove</button>
+                        <input type="number" [(ngModel)]="selectedProductNumber" min="1" max="999">
+                        <button class="btn btn-outline-primary add material-icons" (click)="addProduct()"
+                            [disabled]="productAvailability < 1 ? true : false">add</button>
                     </span>
                 </div>
+                <p class="error-text" *ngIf="amountErr">
+                    {{amountErr}}
+                </p>
                 <!-- Availability -->
-                <!-- TO ADJUST when using API -->
                 <div class="detail-information__availability">
                     <p class="information__availability-status">
                         Tình trạng:
@@ -58,20 +70,42 @@
                 </div>
                 <!-- product price -->
                 <p class="detail-information__price">
-                    Giá tiền: {{productPrice}} 500000 vnd
+                    Giá tiền:
+                    <span>
+                        {{productPriceToShow}}
+                    </span>
+                    <!-- Giá tiền: {{productPrice}} 500000 vnd -->
                 </p>
+                <!-- store adderss -->
+                <div class="detail-information__store">
+                    Hiện có ở:
+                    <ul class="stores-list">
+                        <li *ngFor="let store of stores">
+                            <span class="material-icons">
+                                store
+                            </span>
+                            {{store.ten}} - {{store.address}}
+                        </li>
+                    </ul>
+                </div>
             </div>
             <!-- Product Actions -->
             <div class="product__detail-actions">
                 <!-- Add to cart -->
-                <button class="btn addCart btn-primary">
+                <button class="actionBtn addCart btn-primary" (click)="addToCart()"
+                    [disabled]="productAvailability < 1 ? true : false">
                     <span class="material-icons">
                         add_shopping_cart
                     </span>
-                    Thêm vào giỏ hàng
                 </button>
                 <!-- Buy  -->
-                <button class="btn buyNow btn-outline-primary">Mua ngay</button>
+                <button class="actionBtn buyNow btn-outline-primary"
+                    [disabled]="productAvailability < 1 ? true : false">Mua ngay
+                </button>
+                <button class="actionBtn deleteCart btn-outline-primary"
+                    [disabled]="productAvailability < 1 ? true : false" (click)="deleteCart()">
+                    Hủy giỏ hàng
+                </button>
             </div>
         </div>
     </div>

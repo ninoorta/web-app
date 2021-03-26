@@ -32,7 +32,6 @@ export class CameraComponent implements OnInit {
   productPrice: number;
 
 
-
   private lastScannedCode: string;
   private lastScannedCodeDate: number;
 
@@ -88,7 +87,6 @@ export class CameraComponent implements OnInit {
 
               // if successful open dialog showing product information
               // this.dialog.open(ProductComponent)
-
               Quagga.stop();
               this.router.navigateByUrl(`/pages/camera/product/${this.scannedCode}`)
 

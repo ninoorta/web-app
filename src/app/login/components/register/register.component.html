@@ -13,15 +13,26 @@
 
     <!-- Register Form -->
     <div class="container-fluid">
-        <form class="register__form">
+        <!-- Error alert -->
+        <p class="error-text">{{authError?.message}}</p>
+        <form #registerForm="ngForm" class="register__form" (ngSubmit)="createUser(registerForm)">
             <!-- Name -->
-            <input type="text" class="name register__form-input" placeholder="Họ tên">
+            <input type="text" class="name register__form-input" placeholder="Họ tên" ngModel #fullName="ngModel"
+                name="fullName" required>
+            <!-- Email -->
+            <input type="email" class="email register__form-input" placeholder="Email của bạn" ngModel #email="ngModel"
+                name="email" required>
             <!-- Phone number -->
-            <input type="text" class="phone register__form-input" placeholder="Số điện thoại">
+            <input type="text" class="phone register__form-input" placeholder="Số điện thoại" ngModel #phone="ngModel"
+                name="phone" required>
+            <!-- Address -->
+            <input type="text" class="address register__form-input" placeholder="Địa chỉ" ngModel #address="ngModel"
+                name="address" required>
             <!-- Password -->
-            <input type="text" class="password register__form-input" placeholder="Mật khẩu ( 6 kí tự)">
+            <input type="password" class="password register__form-input" placeholder="Mật khẩu ( 8 kí tự)" ngModel
+                #password="ngModel" name="password" required>
+            <button type="submit" class="registerBtn btn ">Đăng ký</button>
         </form>
 
-        <button class="registerBtn btn ">Đăng ký</button>
     </div>
 </div>

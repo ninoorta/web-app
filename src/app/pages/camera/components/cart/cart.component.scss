@@ -68,24 +68,34 @@
       overflow-x: hidden;
       padding: 0 0 2rem 0;
       .product {
-        font-size: 1.2rem;
+        font-size: 13px;
         margin-top: 0.5rem;
         list-style: none;
-        border-bottom: solid #cecece;
-        border-bottom-width: thin;
+        // box-shadow: rgb(0 0 0 / 15%) 2.4px 2.4px 3.2px;
+        border-bottom: 1.5px solid #cecece;
         padding: 0.75rem 0;
 
+        &__price {
+          font-size: 13px;
+        }
+
+        .col-3 {
+          padding: 0;
+          text-align: center;
+        }
         .col-2 {
           padding: 0;
           span {
             float: right;
-            font-size: 18px;
+            font-size: 20px;
           }
+        }
+        .col-1 {
+          padding: 0;
         }
         &__amount {
           display: inline-flex;
           align-items: center;
-          margin-left: 15px;
 
           label {
             margin-bottom: 0;
@@ -93,6 +103,7 @@
           input {
             width: 25px;
             border: none;
+            outline: none;
           }
         }
       }
@@ -101,7 +112,7 @@
     &-bottom {
       padding-top: 1rem;
       padding-bottom: 1rem;
-      font-size: 1.2rem;
+      font-size: 14px;
 
       .wrapper {
         padding: 0.5rem 0;
@@ -117,5 +128,9 @@
         }
       }
     }
+  }
+
+  .error-text {
+    color: red;
   }
 }
