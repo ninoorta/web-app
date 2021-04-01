@@ -1,0 +1,199 @@
+.orders {
+  height: 100%;
+  position: relative;
+  background-color: #eee;
+  overflow-y: scroll;
+
+  &__header {
+    position: relative;
+    font-size: 2rem;
+    padding: 1rem 0;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+      rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+    background-color: white;
+    text-align: center;
+
+    .backBtn {
+      font-size: 2rem;
+      position: absolute;
+      content: "";
+      left: 0;
+      font-weight: bold;
+      padding: 0;
+      padding-left: 15px;
+    }
+  }
+
+  .shipped {
+    background: #eee;
+
+    .container {
+      background-color: white;
+      padding: 1rem;
+      box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+        rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+    }
+
+    &__item {
+      padding: 1rem 0;
+      overflow: hidden;
+      .col-3 {
+        padding-right: 0;
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+          rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+        padding-left: 0;
+        display: flex;
+        align-items: center;
+        text-align: center;
+        margin-left: 15px;
+        margin-bottom: 5px;
+      }
+
+      &-img {
+        width: 100%;
+        img {
+          display: block;
+          width: 100%;
+        }
+        p {
+          margin-bottom: 0;
+        }
+      }
+
+      &-info {
+        .name {
+          font-weight: bold;
+          display: -webkit-box;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 1;
+          overflow: hidden;
+        }
+        .amount {
+          display: flex;
+          justify-content: flex-end;
+          color: #958c8c;
+          padding: 0.5rem 0;
+        }
+        .price {
+          @extend .amount;
+          color: #ee4d2d;
+        }
+      }
+
+      .sumInfo {
+        border-left: none;
+        padding: 0.75rem 0;
+        border: 1px solid #cecece;
+        border-right: none;
+        .totalProducts {
+          color: #958c8c;
+        }
+
+        .totalMoney {
+          &-label {
+          }
+          &-value {
+            color: #ee4d2d;
+          }
+        }
+      }
+
+      .timeInfo {
+        margin-top: 1rem;
+        .createdAt {
+        }
+      }
+    }
+  }
+
+  .shipping {
+    @extend .shipped;
+
+    &__item {
+      padding: 1rem 0;
+      .col-3 {
+        padding-right: 0;
+        border: 1px solid;
+        padding-left: 0;
+        display: flex;
+        align-items: center;
+        text-align: center;
+        margin-left: 15px;
+        margin-bottom: 5px;
+      }
+
+      &-img {
+        display: block;
+        width: 100%;
+        img {
+          display: block;
+          width: 100%;
+        }
+        p {
+          margin-bottom: 0;
+        }
+      }
+
+      &-info {
+        .name {
+          font-weight: bold;
+          display: -webkit-box;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 1;
+          overflow: hidden;
+        }
+        .amount {
+          display: flex;
+          justify-content: flex-end;
+          color: #958c8c;
+          padding: 0.5rem 0;
+        }
+        .price {
+          @extend .amount;
+          color: #ee4d2d;
+        }
+      }
+
+      .sumInfo {
+        border-left: none;
+        padding: 0.75rem 0;
+        border: 1px solid #cecece;
+        border-right: none;
+        .totalProducts {
+          color: #958c8c;
+        }
+
+        .totalMoney {
+          &-label {
+          }
+          &-value {
+            color: #ee4d2d;
+          }
+        }
+      }
+
+      .timeInfo {
+        margin-top: 1rem;
+
+        .createdAt {
+        }
+      }
+
+      .confirmAction {
+        .btn {
+          background-color: #77bcfa;
+          padding: 0.75rem 2rem;
+          border-radius: 15px;
+          margin-top: 15px;
+          margin-bottom: 5px;
+          color: white;
+          font-weight: bold;
+        }
+      }
+    }
+  }
+
+  mat-tab-group {
+    background-color: white;
+  }
+}

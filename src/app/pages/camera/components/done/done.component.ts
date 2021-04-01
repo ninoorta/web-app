@@ -16,9 +16,8 @@ export class DoneComponent implements OnInit {
 
   ngOnInit(): void {
 
-    // Not done passing data from payment to this page 
-    console.log('>>authenticate-username:41:',
-      this.router.getCurrentNavigation().extras);
+    console.log("done")
+    localStorage.clear();
 
   }
 

@@ -35,7 +35,7 @@ button {
 }
 
 .success {
-  background-color: #d5e7f7;
+  background-color: #b5d7f5;
   color: white;
   font-weight: bold;
   text-align: center;
@@ -48,6 +48,18 @@ button {
   // top: 0;
   // right: 0;
   // animation: notiShow 2s;
+}
+
+.display-none {
+  display: none !important;
+}
+
+.mat-ink-bar {
+  background-color: #3b9cf3 !important;
+}
+
+.mat-tab-header-pagination-controls-enabled .mat-tab-header-pagination {
+  display: none !important;
 }
 
 @keyframes notiShow {

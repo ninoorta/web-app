@@ -43,8 +43,14 @@ export class PaymentComponent implements OnInit {
 
   tempCart = [];
   storesToChoose = [];
-
+  storeToPick: any;
   extraCheck = false;
+
+  // Order
+  tempOrderID: any;
+
+  // User
+  currentUser: any;
 
   constructor(private router: Router,
     public dataService: DataService,
@@ -55,44 +61,42 @@ export class PaymentComponent implements OnInit {
 
     this.totalMoneyToShow = JSON.parse(localStorage.getItem("totalMoneyToShow"))
     this.totalProducts = JSON.parse(localStorage.getItem("totalProducts"))
+    this.tempOrderID = this.db.createId()
 
-    if (!this.isDirect) {
-      this.authService.getUserState().subscribe(user => {
-        if (user) {
-          console.log("has user", user)
+    this.authService.getUserState().subscribe(user => {
+      if (user) {
+        console.log("has user", user)
+        this.currentUser = user;
+        this.db.collection("Users").doc(user.uid).valueChanges().subscribe(userData => {
+          console.log("current user data: ", userData)
 
-          this.db.collection("Users").doc(user.uid).valueChanges().subscribe(userData => {
-            console.log("current user data: ", userData)
-
-            this.addressInput = userData["address"];
-            this.recipientName = userData["fullName"];
-            this.recipientPhone = userData["phone"];
-          })
-        }
-      })
-
-    } else {
-      this.tempCart = JSON.parse(localStorage.getItem("tempCart"));
-      console.log("here tempCart", this.tempCart)
-
-      for (let i = 0; i < this.tempCart.length; i++) {
-        // push store in product of tempCart
-        for (let j = 0; j < this.tempCart[i].selectedStores.length; j++) {
-          let store = this.tempCart[i].selectedStores[j];
-          this.storesToChoose.push(store)
-        }
-      }
-
-      // remove duplicate 
-      this.storesToChoose = Array.from(new Set(this.storesToChoose.map(a => a.id)))
-        .map(id => {
-          return this.storesToChoose.find(a => a.id === id)
+          this.addressInput = userData["address"];
+          this.recipientName = userData["fullName"];
+          this.recipientPhone = userData["phone"];
         })
-      // final storesToChoose
-      // sort by name
-      this.storesToChoose.sort((a, b) => (a.ten > b.ten) ? 1 : ((b.ten > a.ten) ? -1 : 0))
-      console.log("final stores", this.storesToChoose)
+      }
+    })
+
+    this.tempCart = JSON.parse(localStorage.getItem("tempCart"));
+    console.log("here tempCart", this.tempCart)
+
+    for (let i = 0; i < this.tempCart.length; i++) {
+      // push store in product of tempCart
+      for (let j = 0; j < this.tempCart[i].selectedStores.length; j++) {
+        let store = this.tempCart[i].selectedStores[j];
+        this.storesToChoose.push(store)
+      }
     }
+
+    // remove duplicate 
+    this.storesToChoose = Array.from(new Set(this.storesToChoose.map(a => a.id)))
+      .map(id => {
+        return this.storesToChoose.find(a => a.id === id)
+      })
+    // final storesToChoose
+    // sort by name
+    this.storesToChoose.sort((a, b) => (a.ten > b.ten) ? 1 : ((b.ten > a.ten) ? -1 : 0))
+    console.log("final stores", this.storesToChoose)
 
   }
 
@@ -114,6 +118,7 @@ export class PaymentComponent implements OnInit {
   closeChange(): void {
     console.log("click close ChangeContent")
     document.querySelector(".changeContent").classList.add("closedContent");
+    this.selectStoreErr = "";
   }
 
   changeOption(): void {
@@ -132,6 +137,7 @@ export class PaymentComponent implements OnInit {
     // get selected storeID
     let currentStoreID = event.target.htmlFor;
     console.log(currentStoreID)
+    this.storeToPick = currentStoreID;
     let stores;
     for (let i = 0; i < this.tempCart.length; i++) {
       stores = this.tempCart[i].selectedStores;
@@ -145,9 +151,12 @@ export class PaymentComponent implements OnInit {
         // this is index of product doesn't have in selected Store
         this.selectStoreErr = `Cửa hàng bạn chọn hiện đang không có sản phẩm ${this.tempCart[i].name}`
 
+        console.log("extraCheck", this.extraCheck + " isDone", this.isDone)
+        // Nếu có chọn extra
         if (this.extraCheck) {
           this.isDone = true;
         } else {
+          // Nếu không chọn extra;
           this.isDone = false;
         }
         break;
@@ -161,7 +170,7 @@ export class PaymentComponent implements OnInit {
 
   acceptExtra(event) {
     setTimeout(() => {
-      if (!event.target.control.checked && !this.isDone) {
+      if (!event.target.control.checked) {
         // console.log("doesn't accept")
         this.isDone = false;
         this.extraCheck = false;
@@ -171,10 +180,10 @@ export class PaymentComponent implements OnInit {
         this.extraCheck = true;
       }
 
-    }, 1)
+    }, 0)
   }
 
-  checkData() {
+  checkDataToCreateOrder() {
 
     console.log("clicked check Data")
 
@@ -206,21 +215,48 @@ export class PaymentComponent implements OnInit {
       && this.checkValidText(this.addressInput)
       && this.checkValidText(this.recipientName)
     ) {
+
+
+
+      let products = this.tempCart;
+      products.map(item => delete item.selectedStores)
+
+      products.map(product => product.availability = product.availability - product.amount)
+      console.log(products)
+
+      let today = new Date();
+      let currentMonth = today.getMonth() + 1;
+      let currentYear = today.getFullYear();
+      let currentDay = today.getDate();
+      let currentHour = today.getHours()
+      let currentMinutes = today.getMinutes();
+      let fixMinutes = currentMinutes < 10 ? `0${currentMinutes}` : currentMinutes;
+      let isAM = currentHour >= 12 ? "PM" : "AM";
+      let createdAt = `${currentHour}:${fixMinutes} ${isAM} ${currentDay}/${currentMonth}/${currentYear}`;
+
       var data = {
-        address: this.addressInput,
-        name: this.recipientName,
-        phone: this.recipientPhone,
-        note: this.addressNote,
-        method: this.selectedMethod
+        id: this.tempOrderID,
+        method: this.isShipping ? "shipping" : "direct",
+        paymentMethod: this.selectedMethod,
+        recipient: {
+          address: this.addressInput,
+          name: this.recipientName,
+          phone: this.recipientPhone,
+          note: this.addressNote,
+          userID: this.currentUser.uid
+        },
+        products: products,
+        totalMoney: this.totalMoneyToShow,
+        totalProducts: this.totalProducts,
+        createdAt: createdAt,
+        isDone: false
       }
-
-
       console.log("finish checked:", data)
       this.isDone = true;
 
-      // Then move to page done
-      // Not finished
-      this.router.navigateByUrl('/pages/camera/cart/payment/done', { state: { customerData: data } });
+      this.db.collection("Orders").add(data).then(() => {
+        this.router.navigateByUrl('/pages/camera/cart/payment/done');
+      })
     }
   }
 
@@ -249,15 +285,46 @@ export class PaymentComponent implements OnInit {
   checkToCreateOrder() {
     if (this.isDone) {
       console.log("ok")
+      console.log("store to pick", this.storeToPick)
 
 
-      let tempID = this.db.createId()
-      let order = {
-        id: tempID,
-        products: this.tempCart,
-        storeToPick: "",
-        method: this.isDirect ? "direct" : "shipping",
-      }
+      this.db.collection("Stores").doc(this.storeToPick).valueChanges().subscribe(storeToPickData => {
+
+        let productsInOrder = this.tempCart;
+        productsInOrder.map(item => delete item.selectedStores)
+
+        storeToPickData["address"] = storeToPickData["chiTiet"] + ", " + storeToPickData["xa"] + ", "
+          + storeToPickData["huyen"] + ", " + storeToPickData["thanhPho"]
+
+
+        let today = new Date();
+        let currentMonth = today.getMonth() + 1;
+        let currentYear = today.getFullYear();
+        let currentDay = today.getDate();
+        let currentHour = today.getHours()
+        let currentMinutes = today.getMinutes();
+        let fixMinutes = currentMinutes < 10 ? `0${currentMinutes}` : currentMinutes;
+        let isAM = currentHour >= 12 ? "PM" : "AM";
+        let createdAt = `${currentHour}:${fixMinutes} ${isAM} ${currentDay}/${currentMonth}/${currentYear}`;
+
+        let order = {
+          id: this.tempOrderID,
+          products: this.tempCart,
+          storeToPick: storeToPickData,
+          method: this.isDirect ? "direct" : "shipping",
+          isExtra: this.extraCheck,
+          totalMoney: this.totalMoneyToShow,
+          totalProducts: this.totalProducts,
+          createdAt: createdAt,
+          isDone: false
+        }
+
+        console.log(order)
+        this.db.collection("Orders").doc(this.tempOrderID).set(order).then(() => {
+          this.router.navigateByUrl("/pages/camera/cart/payment/done")
+        })
+      })
+
     }
   }
 

@@ -27,7 +27,7 @@
                 <div class="guide" *ngIf="isDirect">
                     <div class="guide__title">Hướng dẫn thanh toán</div>
                     <div class="guide__content">
-                        Khi đến, bạn hãy đọc cho nhân viên cửa hàng mã đơn hàng này : xxxxxxxx
+                        Khi đến, bạn hãy đọc cho nhân viên cửa hàng mã đơn hàng này : {{tempOrderID}}
                     </div>
                 </div>
 
@@ -177,7 +177,7 @@
                     <div class="wrapper">
                         <!-- <button *ngIf="isDirect"  class="finishBtn">Đ</button> -->
                         <!-- routerLink="/pages/camera/cart/payment/done" -->
-                        <button *ngIf="isShipping" class="finishBtn" (click)="checkData()" [disabled]="!isDone">
+                        <button *ngIf="isShipping" class="finishBtn" (click)="checkDataToCreateOrder()">
                             Đặt hàng
                         </button>
                         <button *ngIf="!isShipping" class="finishBtn" (click)="checkToCreateOrder()"

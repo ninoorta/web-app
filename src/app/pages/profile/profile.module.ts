@@ -7,10 +7,11 @@ import { ProfileComponent } from './profile.component';
 // import this to prevent not receiving matmenutriggerfor
 import { MatMenuModule } from '@angular/material/menu';
 import { MatTabsModule } from "@angular/material/tabs";
+import { OrdersComponent } from './components/orders/orders.component';
 
 
 @NgModule({
-  declarations: [ProfileComponent],
+  declarations: [ProfileComponent, OrdersComponent],
   imports: [
     CommonModule,
     ProfileRoutingModule,

@@ -99,8 +99,8 @@
                     </span>
                 </button>
                 <!-- Buy  -->
-                <button class="actionBtn buyNow btn-outline-primary"
-                    [disabled]="productAvailability < 1 ? true : false">Mua ngay
+                <button class="actionBtn buyNow btn-outline-primary" [disabled]="productAvailability < 1 ? true : false"
+                    (click)="buyNow()">Mua ngay
                 </button>
                 <button class="actionBtn deleteCart btn-outline-primary"
                     [disabled]="productAvailability < 1 ? true : false" (click)="deleteCart()">

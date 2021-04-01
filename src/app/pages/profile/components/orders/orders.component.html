@@ -1,0 +1,106 @@
+<div class="orders">
+    <div class="orders__header">
+        <div class="container-fluid">
+            <button class="backBtn btn material-icons" routerLink="/pages/profile">
+                arrow_back_ios
+            </button>
+            <span class="orders__header-title">Đơn mua hàng</span>
+        </div>
+    </div>
+    <!-- Mat-tab -->
+    <mat-tab-group mat-stretch-tabs [(selectedIndex)]="selectedTab" (selectedTabChange)="changeSelectedTab($event)">
+        <mat-tab label="Đơn đang giao">
+            <ng-template mat-tab-label>
+                <span>
+                    Đơn đang giao
+                </span>
+            </ng-template>
+            <div class="shipping">
+                <div class="shipping__item" *ngFor="let order of shippingOrders; let i = index">
+                    <div class="container">
+                        <div class="row" *ngFor="let product of order.products">
+                            <div class="col-3">
+                                <div class="shipping__item-img">
+                                    <img [src]=product.image *ngIf="product.image">
+                                    <p *ngIf="!product.image">Không có ảnh</p>
+                                </div>
+                            </div>
+                            <div class="col-8">
+                                <div class="shipping__item-info">
+                                    <div class="name">{{product.name}}</div>
+                                    <div class="amount">x{{product.amount}}</div>
+                                    <div class="price">{{product.priceToShow}}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row sumInfo">
+                            <div class="col d-flex justify-content-between">
+                                <div class="totalProducts">{{order.totalProducts}} sản phẩm</div>
+                                <div class="totalMoney">
+                                    <span class="totalMoney-label">Thành tiền: </span>
+                                    <span class="totalMoney-value">{{order.totalMoney}}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row timeInfo">
+                            <div class="col">
+                                <div class="createdAt">
+                                    Bạn đã đặt mua sản phẩm này vào {{order.createdAt}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row confirmAction  justify-content-center">
+                            <button class="btn" (click)="confirmDoneOrder(order.id, i)">Bạn đã nhận được
+                                hàng</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </mat-tab>
+        <mat-tab label="Đơn đã giao">
+            <ng-template mat-tab-label>
+                <span>
+                    Đơn đã giao
+                </span>
+            </ng-template>
+            <div class="shipped">
+                <div class="shipped__item" *ngFor="let order of shippedOrders">
+                    <div class="container">
+                        <div class="row" *ngFor="let product of order.products">
+                            <div class="col-3">
+                                <div class="shipped__item-img">
+                                    <img [src]=product.image *ngIf="product.image">
+                                    <p *ngIf="!product.image">Không có ảnh</p>
+                                </div>
+                            </div>
+                            <div class="col-8">
+                                <div class="shipped__item-info">
+                                    <div class="name">{{product.name}}</div>
+                                    <div class="amount">x{{product.amount}}</div>
+                                    <div class="price">{{product.priceToShow}}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row sumInfo">
+                            <div class="col d-flex justify-content-between">
+                                <div class="totalProducts">{{order.totalProducts}} sản phẩm</div>
+                                <div class="totalMoney">
+                                    <span class="totalMoney-label">Thành tiền: </span>
+                                    <span class="totalMoney-value">{{order.totalMoney}}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row timeInfo">
+                            <div class="col">
+                                <div class="createdAt">
+                                    Bạn đã đặt mua sản phẩm này vào {{order.createdAt}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </mat-tab>
+    </mat-tab-group>
+
+</div>

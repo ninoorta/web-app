@@ -29,12 +29,12 @@
                         </span>
                     </label>
                     <input #userAvatar type="file" accept="image/*" id="userAvatar" (change)="userChangeAvatar($event)"
-                        hidden />
+                        hidden [disabled]="!isEdit" />
                 </div>
             </div>
         </div>
 
-        <mat-tab-group class="align-items-center">
+        <mat-tab-group class="align-items-center" (selectedTabChange)="changeSelectedTab($event)">
             <mat-tab label="Thông tin">
                 <ng-template mat-tab-label>
                     <span>
@@ -126,6 +126,53 @@
                             Tổng tiền bạn đã mua sắm:
                             <span>{{totalSpentMoney}}</span>
                         </p>
+                        <p>
+                            Bạn đã mua {{totalBuyProducts}} sản phẩm
+                        </p>
+                        <div class="report__order">
+                            <div class="row">
+                                <div class="col wrapper">
+                                    <div class="report__order-title">
+                                        <span class="material-icons-outlined icon">
+                                            assignment
+                                        </span>
+                                        <span class="title__text">
+                                            Đơn mua hàng
+                                        </span>
+                                    </div>
+                                    <div class="report__order-all" (click)="moveToShipped()">
+                                        <span>Xem lịch sử mua hàng</span>
+                                        <span class="material-icons">
+                                            chevron_right
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row order__status">
+                                <div class="col-6">
+                                    <div class="order__status-item">
+                                        <div class="icon" routerLink="/pages/profile/orders">
+                                            <span class="material-icons-outlined">
+                                                local_shipping
+                                            </span>
+                                            <span class="displayNumber">{{shippingNumber}}</span>
+                                        </div>
+                                        <span>Đang giao</span>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="order__status-item">
+                                        <div class="icon" (click)="moveToShipped()">
+                                            <span class="material-icons-outlined">
+                                                assignment_turned_in
+                                            </span>
+                                            <span class="displayNumber">{{shippedNumber}}</span>
+                                        </div>
+                                        <span>Đã giao</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </mat-tab>

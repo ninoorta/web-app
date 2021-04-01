@@ -84,9 +84,11 @@ export class ProductComponent implements OnInit, OnDestroy {
   }
 
   addToCart() {
+    console.log("--------------------------------------------------");
+
     console.log("current selected number", this.selectedProductNumber)
     console.log("has product in cart?", this.hasThisProductInCart)
-    console.log("available", this.currentProductAvailableAmount)
+    console.log("current available", this.currentProductAvailableAmount)
     console.log("currentProduct", this.currentProduct)
 
     // Nếu chọn quá số sản phẩm khả dụng và sản phẩm hiện tại chưa có trong giỏ hàng
@@ -106,18 +108,30 @@ export class ProductComponent implements OnInit, OnDestroy {
           this.selectedProductNumber = 1;
         } else {
           // Sản phẩm hiện tại có trong giỏ hàng và số lượng chọn trong khoảng cho phép
-          this.amountErr = "";
-          this.productsInCart = this.productsInCart + this.selectedProductNumber;
-          this.currentProductAvailableAmount = this.currentProductAvailableAmount - this.selectedProductNumber;
-          this.currentProduct["amount"] = this.currentProduct["amount"] + this.selectedProductNumber;
-          console.log("current product amount when have this product in cart", this.currentProduct["amount"])
-
-
           let tempCart = JSON.parse(localStorage.getItem("tempCart"))
           console.log("has product", tempCart)
           for (let i = 0; i < tempCart.length; i++) {
             if (tempCart[i].code == this.currentProduct.code) {
-              tempCart[i].amount = tempCart[i].amount + this.currentProduct.amount;
+              // tempCart[i].amount = tempCart[i].amount + this.currentProduct.amount;
+              this.currentProduct.amount = tempCart[i].amount
+            }
+          }
+
+          this.amountErr = "";
+          this.productsInCart = this.productsInCart + this.selectedProductNumber;
+          this.currentProductAvailableAmount = this.currentProductAvailableAmount - this.selectedProductNumber;
+          this.currentProduct["amount"] = this.currentProduct["amount"] + this.selectedProductNumber;
+          console.log("selected product number", this.selectedProductNumber)
+          console.log("current product amount when have this product in cart", this.currentProduct["amount"])
+
+
+          // let tempCart = JSON.parse(localStorage.getItem("tempCart"))
+          // console.log("has product", tempCart)
+
+          for (let i = 0; i < tempCart.length; i++) {
+            if (tempCart[i].code == this.currentProduct.code) {
+              // tempCart[i].amount = tempCart[i].amount + this.currentProduct.amount;
+              tempCart[i].amount = this.currentProduct.amount
             }
           }
           localStorage.setItem("tempCart", JSON.stringify(tempCart))
@@ -163,6 +177,11 @@ export class ProductComponent implements OnInit, OnDestroy {
 
     }
 
+  }
+
+  buyNow() {
+    this.addToCart();
+    this.router.navigateByUrl("/pages/camera/cart/payment")
   }
 
   getScannedProductData(barcode) {
@@ -244,7 +263,6 @@ export class ProductComponent implements OnInit, OnDestroy {
   checkProductInCart() {
     // Get tempCart when have current product data
     this.tempCart = JSON.parse(localStorage.getItem("tempCart"))
-    console.log("tempCart?", this.tempCart)
     if (this.tempCart) {
       if (this.tempCart.length > 0) {
         console.log("has tempCart", this.tempCart)
