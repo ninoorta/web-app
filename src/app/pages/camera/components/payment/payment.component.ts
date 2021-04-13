@@ -43,7 +43,7 @@ export class PaymentComponent implements OnInit {
 
   tempCart = [];
   storesToChoose = [];
-  storeToPick: any;
+  storeToPickID: any;
   extraCheck = false;
 
   // Order
@@ -127,7 +127,7 @@ export class PaymentComponent implements OnInit {
   }
 
   changeStore(event) {
-    console.log("change store", event);
+    // console.log("change store", event);
     let labels = document.getElementsByClassName("select-store__label");
 
     for (let i = 0; i < labels.length; i++) {
@@ -137,7 +137,7 @@ export class PaymentComponent implements OnInit {
     // get selected storeID
     let currentStoreID = event.target.htmlFor;
     console.log(currentStoreID)
-    this.storeToPick = currentStoreID;
+    this.storeToPickID = currentStoreID;
     let stores;
     for (let i = 0; i < this.tempCart.length; i++) {
       stores = this.tempCart[i].selectedStores;
@@ -145,7 +145,7 @@ export class PaymentComponent implements OnInit {
       for (let j = 0; j < stores.length; j++) {
         tempArr.push(stores[j]["id"])
       }
-      console.log(tempArr)
+      // console.log(tempArr)
       if (tempArr.indexOf(currentStoreID) == -1) {
         console.log("found", i)
         // this is index of product doesn't have in selected Store
@@ -221,7 +221,13 @@ export class PaymentComponent implements OnInit {
       let products = this.tempCart;
       products.map(item => delete item.selectedStores)
 
-      products.map(product => product.availability = product.availability - product.amount)
+      // Update product amount here:
+      for (let i = 0; i < this.tempCart.length; i++) {
+        let product = this.tempCart[i];
+        // This loop for adjust amount of producting
+        this.adjustProductAmount(product, product.productID)
+      }
+      // products.map(product => product.availability = product.availability - product.amount)
       console.log(products)
 
       let today = new Date();
@@ -285,10 +291,10 @@ export class PaymentComponent implements OnInit {
   checkToCreateOrder() {
     if (this.isDone) {
       console.log("ok")
-      console.log("store to pick", this.storeToPick)
+      console.log("store to pick", this.storeToPickID)
 
 
-      this.db.collection("Stores").doc(this.storeToPick).valueChanges().subscribe(storeToPickData => {
+      this.db.collection("Stores").doc(this.storeToPickID).valueChanges().subscribe(storeToPickData => {
 
         let productsInOrder = this.tempCart;
         productsInOrder.map(item => delete item.selectedStores)
@@ -296,6 +302,11 @@ export class PaymentComponent implements OnInit {
         storeToPickData["address"] = storeToPickData["chiTiet"] + ", " + storeToPickData["xa"] + ", "
           + storeToPickData["huyen"] + ", " + storeToPickData["thanhPho"]
 
+        storeToPickData["id"] = this.storeToPickID;
+
+        delete storeToPickData["xa"]
+        delete storeToPickData["huyen"]
+        delete storeToPickData["thanhPho"]
 
         let today = new Date();
         let currentMonth = today.getMonth() + 1;
@@ -320,12 +331,26 @@ export class PaymentComponent implements OnInit {
         }
 
         console.log(order)
+
+        for (let i = 0; i < this.tempCart.length; i++) {
+          let product = this.tempCart[i];
+          // This loop for adjust amount of producting
+          this.adjustProductAmount(product, product.productID)
+        }
+
         this.db.collection("Orders").doc(this.tempOrderID).set(order).then(() => {
           this.router.navigateByUrl("/pages/camera/cart/payment/done")
         })
       })
 
     }
+  }
+
+  adjustProductAmount(product, productID) {
+    // productID == document id
+    this.db.collection("Products").doc(productID).update({
+      availability: product.availability - product.amount
+    })
   }
 
 }

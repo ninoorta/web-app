@@ -1,0 +1,11 @@
+<div class="confirm">
+    <div class="container">
+        <button class="btn closeBtn material-icons" (click)="onClose()">close</button>
+        <p class="confirm-text">Tôi xác nhận tôi đã nhận hàng và hài lòng với sản phẩm. Sẽ không có yêu
+            cầu Hoàn tiền hay Trả hàng sau khi tôi xác nhận</p>
+        <div class="actions">
+            <button class="btn yesBtn material-icons" [mat-dialog-close]="true">done</button>
+            <button class="btn noBtn material-icons" [mat-dialog-close]="false">cancel</button>
+        </div>
+    </div>
+</div>

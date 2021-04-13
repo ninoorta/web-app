@@ -28,6 +28,11 @@ export class ProductComponent implements OnInit, OnDestroy {
   productPriceToShow: string;
 
 
+  // 
+  totalMoney: number;
+  totalProducts: number;
+  totalMoneyToShow: string;
+
   // Store
   stores = [];
 
@@ -179,11 +184,6 @@ export class ProductComponent implements OnInit, OnDestroy {
 
   }
 
-  buyNow() {
-    this.addToCart();
-    this.router.navigateByUrl("/pages/camera/cart/payment")
-  }
-
   getScannedProductData(barcode) {
     // Best for query
     this.db.collection("Products", ref => ref.where("code", "==", barcode)).valueChanges().subscribe(data => {
@@ -257,7 +257,8 @@ export class ProductComponent implements OnInit, OnDestroy {
     this.hasThisProductInCart = false;
     this.amountErr = "";
     this.selectedProductNumber = 1;
-    this.currentProductAvailableAmount = this.currentProduct.availability
+    this.currentProductAvailableAmount = this.currentProduct.availability;
+    // this.tempCart = [];
   }
 
   checkProductInCart() {

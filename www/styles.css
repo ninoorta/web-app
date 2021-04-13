@@ -85,6 +85,12 @@ body {
   text-align: center;
   min-width: 200px;
   border-radius: 2px;
+}.display-none {
+  display: none !important;
+}.mat-ink-bar {
+  background-color: #3b9cf3 !important;
+}.mat-tab-header-pagination-controls-enabled .mat-tab-header-pagination {
+  display: none !important;
 }@keyframes notiShow {
   0% {
     right: -5rem;

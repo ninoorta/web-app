@@ -2,6 +2,10 @@ span {
   font-size: 2em;
   margin-right: 10px;
 }
+ion-icon {
+  font-size: 2em;
+  margin-right: 10px;
+}
 .logo {
   width: 200px;
   text-align: center;
@@ -32,6 +36,7 @@ span {
   display: flex;
   align-items: center;
   // margin-top: 0.2em;
+  color: #224177;
 }
 .liDefault {
   outline: none;
@@ -56,6 +61,13 @@ span {
   // margin-top: -1.25rem;
   margin-top: -0.15rem;
   span {
+    background-color: #d5e7f7;
+    padding: 1rem;
+    border-radius: 50%;
+    margin-bottom: 2rem;
+    font-size: 3rem;
+  }
+  ion-icon {
     background-color: #d5e7f7;
     padding: 1rem;
     border-radius: 50%;

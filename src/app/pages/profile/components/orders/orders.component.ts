@@ -4,6 +4,10 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AuthService } from '../../../../login/services/auth.service';
 
+import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
+
+
 @Component({
   selector: 'app-orders',
   templateUrl: './orders.component.html',
@@ -21,7 +25,7 @@ export class OrdersComponent implements OnInit, OnDestroy {
   isFirstGetShipping: boolean = true;
   isFirstGetShipped: boolean = true;
 
-  constructor(private db: AngularFirestore, private auth: AuthService) { }
+  constructor(private db: AngularFirestore, private auth: AuthService, private dialog: MatDialog) { }
 
   ngOnInit(): void {
 
@@ -151,6 +155,19 @@ export class OrdersComponent implements OnInit, OnDestroy {
         console.log('this user shipped orders', this.shippedOrders)
 
       })
+    })
+
+  }
+
+  openModalConfirm(orderID, orderIndex) {
+    this.dialog.open(ConfirmDialogComponent, {
+      autoFocus: false
+    }).afterClosed().subscribe(res => {
+      if (res) {
+        // Nếu user chọn đã nhận
+        console.log("user confirmed receiving this order")
+        this.confirmDoneOrder(orderID, orderIndex);
+      }
     })
 
   }

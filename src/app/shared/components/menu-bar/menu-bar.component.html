@@ -2,7 +2,8 @@
     <ul>
         <li [class]="splitedUrl.includes(item.elementOnUrl) ? 'liActive' : 'liDefault'" *ngFor="let item of menuItem"
             routerLink="{{item.link}}">
-            <span [class]="item.class">{{item.icon}}</span> {{item.title}}
+            <!-- <span [class]="item.class">{{item.icon}}</span> {{item.title}} -->
+            <ion-icon [name]="item.name"></ion-icon>
         </li>
     </ul>
 </div>

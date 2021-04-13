@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.scss']
 })
-export class CartComponent implements OnInit {
+export class CartComponent implements OnInit, OnDestroy {
 
   isHidden: boolean = false;
 
@@ -35,11 +35,20 @@ export class CartComponent implements OnInit {
     // this.products = temp;
 
 
+    // add display none to menu bar bottom
+    document.querySelector(".menubar").classList.add("display-none");
+
     let tempCart = JSON.parse(localStorage.getItem("tempCart"))
     console.log("get tempCart in cart route", tempCart);
     this.products = tempCart
     this.getTotal(this.products);
 
+
+  }
+
+  ngOnDestroy() {
+    // remove display none to menu bar bottom
+    document.querySelector(".menubar").classList.remove("display-none");
 
   }
 
