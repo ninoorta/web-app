@@ -46,6 +46,7 @@ export class LoginComponent implements OnInit {
     this.windowRef = this.windowService.windowRef;
 
     this.auth.eventAuthError$.subscribe(data => {
+      console.log("err log", data)
       this.authError = data;
     })
   }
@@ -56,7 +57,7 @@ export class LoginComponent implements OnInit {
   }
 
   openForgetPass() {
-    this.dialog.open(ForgetPasswordComponent, { autoFocus: false });
+    this.dialog.open(ForgetPasswordComponent, { autoFocus: false })
   }
 
 

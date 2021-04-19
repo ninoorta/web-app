@@ -78,14 +78,19 @@ export class AuthService {
     return this.auth.signOut();
   }
 
-  resetPassword(email: string) {
-    return this.auth.sendPasswordResetEmail(email)
-      .catch(err => {
-        this.eventAuthError.next(err);
+  async resetPassword(email: string) {
+    try {
+      await this.auth.sendPasswordResetEmail(email).then((res) => {
+        console.log("ok", res)
+        this.eventAuthError.next("")
+      }, (res) => {
+        console.log(" not ok", res)
+        this.eventAuthError.next(res);
       })
-      .then(() => {
-        console.log("sent email reset password!")
-      })
+    } catch (err) {
+      this.eventAuthError.next(err);
+    }
+    // console.log("sent email reset password!");
   }
 
 
