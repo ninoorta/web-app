@@ -760,7 +760,7 @@ __webpack_require__.r(__webpack_exports__);
 var routes = [
     {
         path: 'login',
-        loadChildren: function () { return Promise.all(/*! import() | login-login-module */[__webpack_require__.e("default~firebase-auth~login-login-module"), __webpack_require__.e("default~login-login-module~profile-profile-module"), __webpack_require__.e("login-login-module")]).then(__webpack_require__.bind(null, /*! ./login/login.module */ "X3zk"))
+        loadChildren: function () { return Promise.all(/*! import() | login-login-module */[__webpack_require__.e("default~camera-camera-module~home-home-module~login-login-module~profile-profile-module"), __webpack_require__.e("default~firebase-auth~login-login-module"), __webpack_require__.e("default~login-login-module~profile-profile-module"), __webpack_require__.e("login-login-module")]).then(__webpack_require__.bind(null, /*! ./login/login.module */ "X3zk"))
             .then(function (m) { return m.LoginModule; }); },
     },
     {

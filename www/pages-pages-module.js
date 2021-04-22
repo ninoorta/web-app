@@ -76,17 +76,17 @@ var routes = [
         children: [
             {
                 path: 'home',
-                loadChildren: function () { return __webpack_require__.e(/*! import() | home-home-module */ "home-home-module").then(__webpack_require__.bind(null, /*! ./home/home.module */ "99Un"))
+                loadChildren: function () { return Promise.all(/*! import() | home-home-module */[__webpack_require__.e("default~camera-camera-module~home-home-module~login-login-module~profile-profile-module"), __webpack_require__.e("home-home-module")]).then(__webpack_require__.bind(null, /*! ./home/home.module */ "99Un"))
                     .then(function (m) { return m.HomeModule; }); }
             },
             {
                 path: 'camera',
-                loadChildren: function () { return __webpack_require__.e(/*! import() | camera-camera-module */ "camera-camera-module").then(__webpack_require__.bind(null, /*! ./camera/camera.module */ "eoT/"))
+                loadChildren: function () { return Promise.all(/*! import() | camera-camera-module */[__webpack_require__.e("default~camera-camera-module~home-home-module~login-login-module~profile-profile-module"), __webpack_require__.e("camera-camera-module")]).then(__webpack_require__.bind(null, /*! ./camera/camera.module */ "eoT/"))
                     .then(function (m) { return m.CameraModule; }); }
             },
             {
                 path: 'profile',
-                loadChildren: function () { return Promise.all(/*! import() | profile-profile-module */[__webpack_require__.e("default~login-login-module~profile-profile-module"), __webpack_require__.e("profile-profile-module")]).then(__webpack_require__.bind(null, /*! ./profile/profile.module */ "723k"))
+                loadChildren: function () { return Promise.all(/*! import() | profile-profile-module */[__webpack_require__.e("default~camera-camera-module~home-home-module~login-login-module~profile-profile-module"), __webpack_require__.e("default~login-login-module~profile-profile-module"), __webpack_require__.e("profile-profile-module")]).then(__webpack_require__.bind(null, /*! ./profile/profile.module */ "723k"))
                     .then(function (m) { return m.ProfileModule; }); }
             },
             {

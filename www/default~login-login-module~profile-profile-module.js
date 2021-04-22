@@ -1,109 +1,5 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([["default~login-login-module~profile-profile-module"],{
 
-/***/ "6Hrc":
-/*!************************************************!*\
-  !*** ./src/app/login/services/auth.service.ts ***!
-  \************************************************/
-/*! exports provided: AuthService */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AuthService", function() { return AuthService; });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "fXoL");
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! rxjs */ "qCKp");
-/* harmony import */ var _angular_fire_auth__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/fire/auth */ "UbJi");
-/* harmony import */ var _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/fire/firestore */ "I/3d");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "tyNb");
-/* harmony import */ var _shared_services_noti_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../shared/services/noti.service */ "y1Wr");
-
-
-
-
-
-
-
-var AuthService = /** @class */ (function () {
-    function AuthService(auth, database, router, notiService) {
-        this.auth = auth;
-        this.database = database;
-        this.router = router;
-        this.notiService = notiService;
-        this.eventAuthError = new rxjs__WEBPACK_IMPORTED_MODULE_1__["BehaviorSubject"]("");
-        this.eventAuthError$ = this.eventAuthError.asObservable();
-    }
-    AuthService.prototype.getUserState = function () {
-        return this.auth.authState;
-    };
-    AuthService.prototype.createUser = function (user) {
-        var _this = this;
-        this.auth.createUserWithEmailAndPassword(user.email, user.password)
-            .then(function (userCredential) {
-            _this.newUser = user;
-            console.log(userCredential);
-            userCredential.user.updateProfile({
-                displayName: user.fullName
-            });
-            _this.insertUserData(userCredential)
-                .then(function () {
-                // Successfully create a user
-                _this.router.navigate(['/login']);
-            });
-        })
-            .catch(function (err) {
-            _this.eventAuthError.next(err);
-        });
-    };
-    AuthService.prototype.insertUserData = function (userCredential) {
-        return this.database.doc("Users/" + userCredential.user.uid).set({
-            email: this.newUser.email,
-            fullName: this.newUser.fullName,
-            phone: this.newUser.phone,
-            address: this.newUser.address,
-        });
-    };
-    AuthService.prototype.logIn = function (email, password) {
-        var _this = this;
-        this.auth.signInWithEmailAndPassword(email, password)
-            .catch(function (err) {
-            _this.eventAuthError.next(err);
-        })
-            .then(function (userCredential) {
-            if (userCredential) {
-                _this.router.navigate(['/pages/profile']);
-                console.log("successfully logged in  ", userCredential);
-                _this.notiService.success("Chào mừng " + userCredential.user.displayName);
-            }
-        });
-    };
-    AuthService.prototype.logOut = function () {
-        return this.auth.signOut();
-    };
-    AuthService.prototype.resetPassword = function (email) {
-        var _this = this;
-        return this.auth.sendPasswordResetEmail(email)
-            .catch(function (err) {
-            _this.eventAuthError.next(err);
-        })
-            .then(function () {
-            console.log("sent email reset password!");
-        });
-    };
-    AuthService.ɵfac = function AuthService_Factory(t) { return new (t || AuthService)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](_angular_fire_auth__WEBPACK_IMPORTED_MODULE_2__["AngularFireAuth"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_3__["AngularFirestore"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](_angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](_shared_services_noti_service__WEBPACK_IMPORTED_MODULE_5__["NotificationsService"])); };
-    AuthService.ɵprov = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineInjectable"]({ token: AuthService, factory: AuthService.ɵfac, providedIn: 'root' });
-    return AuthService;
-}());
-
-/*@__PURE__*/ (function () { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](AuthService, [{
-        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"],
-        args: [{
-                providedIn: 'root'
-            }]
-    }], function () { return [{ type: _angular_fire_auth__WEBPACK_IMPORTED_MODULE_2__["AngularFireAuth"] }, { type: _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_3__["AngularFirestore"] }, { type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"] }, { type: _shared_services_noti_service__WEBPACK_IMPORTED_MODULE_5__["NotificationsService"] }]; }, null); })();
-
-
-/***/ }),
-
 /***/ "LmZi":
 /*!**********************************************************!*\
   !*** ./node_modules/@firebase/storage/dist/index.esm.js ***!
@@ -115,7 +11,7 @@ var AuthService = /** @class */ (function () {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "registerStorage", function() { return registerStorage; });
 /* harmony import */ var _firebase_app__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @firebase/app */ "zIRd");
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! tslib */ "t7fG");
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! tslib */ "WVRz");
 /* harmony import */ var _firebase_util__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @firebase/util */ "qOnz");
 /* harmony import */ var _firebase_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @firebase/component */ "/6Yf");
 
@@ -4626,53 +4522,6 @@ function registerStorage(instance) {
 }
 
 registerStorage(_firebase_app__WEBPACK_IMPORTED_MODULE_0__["default"]);
-
-
-/***/ }),
-
-/***/ "y1Wr":
-/*!*************************************************!*\
-  !*** ./src/app/shared/services/noti.service.ts ***!
-  \*************************************************/
-/*! exports provided: NotificationsService */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NotificationsService", function() { return NotificationsService; });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "fXoL");
-/* harmony import */ var _angular_material_snack_bar__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/material/snack-bar */ "dNgK");
-
-
-
-var NotificationsService = /** @class */ (function () {
-    function NotificationsService(snackBar) {
-        this.snackBar = snackBar;
-        this.config = {
-            duration: 3000,
-            horizontalPosition: 'right',
-            verticalPosition: 'top'
-        };
-    }
-    NotificationsService.prototype.success = function (msg) {
-        this.config['panelClass'] = ['notification', 'success'];
-        this.snackBar.open(msg, '', this.config);
-    };
-    NotificationsService.prototype.warn = function (msg) {
-        this.config['panelClass'] = ['notification', 'warn'];
-        this.snackBar.open(msg, '', this.config);
-    };
-    NotificationsService.ɵfac = function NotificationsService_Factory(t) { return new (t || NotificationsService)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](_angular_material_snack_bar__WEBPACK_IMPORTED_MODULE_1__["MatSnackBar"])); };
-    NotificationsService.ɵprov = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineInjectable"]({ token: NotificationsService, factory: NotificationsService.ɵfac, providedIn: 'root' });
-    return NotificationsService;
-}());
-
-/*@__PURE__*/ (function () { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](NotificationsService, [{
-        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"],
-        args: [{
-                providedIn: 'root'
-            }]
-    }], function () { return [{ type: _angular_material_snack_bar__WEBPACK_IMPORTED_MODULE_1__["MatSnackBar"] }]; }, null); })();
 
 
 /***/ })

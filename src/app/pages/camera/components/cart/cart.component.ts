@@ -105,6 +105,8 @@ export class CartComponent implements OnInit, OnDestroy {
     let tempCart = JSON.parse(localStorage.getItem("tempCart"));
     tempCart = this.products;
     localStorage.setItem("tempCart", JSON.stringify(tempCart));
+
+    this.getTotal(this.products)
   }
 
 
