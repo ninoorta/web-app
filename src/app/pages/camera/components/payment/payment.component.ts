@@ -1,19 +1,19 @@
 import { ThrowStmt } from '@angular/compiler';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { DataService } from '../../services/data.service';
 import { AuthService } from '../../../../login/services/auth.service';
 import { AngularFirestore } from '@angular/fire/firestore'
 
-
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-payment',
   templateUrl: './payment.component.html',
   styleUrls: ['./payment.component.scss']
 })
-export class PaymentComponent implements OnInit {
+export class PaymentComponent implements OnInit, OnDestroy {
 
   isDirect: boolean = true;
   isShipping: boolean;
@@ -52,10 +52,13 @@ export class PaymentComponent implements OnInit {
   // User
   currentUser: any;
 
+  private controlSubscription: Subscription
+
   constructor(private router: Router,
     public dataService: DataService,
     private authService: AuthService,
-    private db: AngularFirestore) { }
+    private db: AngularFirestore
+  ) { }
 
   ngOnInit(): void {
 
@@ -98,6 +101,13 @@ export class PaymentComponent implements OnInit {
     this.storesToChoose.sort((a, b) => (a.ten > b.ten) ? 1 : ((b.ten > a.ten) ? -1 : 0))
     console.log("final stores", this.storesToChoose)
 
+  }
+
+  ngOnDestroy(): void {
+    // unsubscribe func when select store to pick
+    this.db.collection("Stores").doc(this.storeToPickID).valueChanges().subscribe().unsubscribe();
+    this.controlSubscription.unsubscribe();
+    console.log("it's destroying now")
   }
 
 
@@ -261,7 +271,9 @@ export class PaymentComponent implements OnInit {
       this.isDone = true;
 
       this.db.collection("Orders").add(data).then(() => {
-        this.router.navigateByUrl('/pages/camera/cart/payment/done');
+        // this.router.navigateByUrl('/pages/camera/cart/payment/done');
+        this.router.navigate(["/pages/camera/cart/payment/done"]);
+        console.log("it's ok to move to page done");
       })
     }
   }
@@ -293,8 +305,7 @@ export class PaymentComponent implements OnInit {
       console.log("ok")
       console.log("store to pick", this.storeToPickID)
 
-
-      this.db.collection("Stores").doc(this.storeToPickID).valueChanges().subscribe(storeToPickData => {
+      this.controlSubscription = this.db.collection("Stores").doc(this.storeToPickID).valueChanges().subscribe(storeToPickData => {
 
         let productsInOrder = this.tempCart;
         productsInOrder.map(item => delete item.selectedStores)
@@ -338,10 +349,13 @@ export class PaymentComponent implements OnInit {
           this.adjustProductAmount(product, product.productID)
         }
 
+
+
         this.db.collection("Orders").doc(this.tempOrderID).set(order).then(() => {
           this.router.navigateByUrl("/pages/camera/cart/payment/done")
+          console.log("it's ok to move to page done")
         })
-      })
+      });
 
     }
   }

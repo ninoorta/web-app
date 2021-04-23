@@ -175,11 +175,11 @@
                 <!-- Finish payment -->
                 <div class="col-6">
                     <div class="wrapper">
-                        <!-- <button *ngIf="isDirect"  class="finishBtn">Đ</button> -->
-                        <!-- routerLink="/pages/camera/cart/payment/done" -->
+                        <!-- When shipping -->
                         <button *ngIf="isShipping" class="finishBtn" (click)="checkDataToCreateOrder()">
                             Đặt hàng
                         </button>
+                        <!-- When pay at selected store -->
                         <button *ngIf="!isShipping" class="finishBtn" (click)="checkToCreateOrder()"
                             [disabled]="!isDone">
                             Xác nhận

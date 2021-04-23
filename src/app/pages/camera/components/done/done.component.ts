@@ -10,8 +10,6 @@ import { Router } from '@angular/router';
 })
 export class DoneComponent implements OnInit {
 
-  state$: Observable<object>;
-
   constructor(public activatedRoute: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {

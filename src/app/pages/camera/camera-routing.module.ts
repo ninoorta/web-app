@@ -29,6 +29,11 @@ const routes: Routes = [
   {
     path: 'cart/payment/done',
     component: DoneComponent,
+  },
+  {
+    path: '',
+    redirectTo: 'camera',
+    pathMatch: 'full',
   }
 ];
 
