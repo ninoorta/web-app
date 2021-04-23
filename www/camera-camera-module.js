@@ -344,6 +344,11 @@ var routes = [
     {
         path: 'cart/payment/done',
         component: _components_done_done_component__WEBPACK_IMPORTED_MODULE_6__["DoneComponent"],
+    },
+    {
+        path: '',
+        redirectTo: 'camera',
+        pathMatch: 'full',
     }
 ];
 var CameraRoutingModule = /** @class */ (function () {
@@ -6708,6 +6713,12 @@ var PaymentComponent = /** @class */ (function () {
         this.storesToChoose.sort(function (a, b) { return (a.ten > b.ten) ? 1 : ((b.ten > a.ten) ? -1 : 0); });
         console.log("final stores", this.storesToChoose);
     };
+    PaymentComponent.prototype.ngOnDestroy = function () {
+        // unsubscribe func when select store to pick
+        this.db.collection("Stores").doc(this.storeToPickID).valueChanges().subscribe().unsubscribe();
+        this.controlSubscription.unsubscribe();
+        console.log("it's destroying now");
+    };
     PaymentComponent.prototype.clickChange = function (event) {
         if (event.target.className.indexOf("direct") !== -1) {
             this.isDirect = true;
@@ -6849,7 +6860,9 @@ var PaymentComponent = /** @class */ (function () {
             console.log("finish checked:", data);
             this.isDone = true;
             this.db.collection("Orders").add(data).then(function () {
-                _this.router.navigateByUrl('/pages/camera/cart/payment/done');
+                // this.router.navigateByUrl('/pages/camera/cart/payment/done');
+                _this.router.navigate(["/pages/camera/cart/payment/done"]);
+                console.log("it's ok to move to page done");
             });
         }
     };
@@ -6876,7 +6889,7 @@ var PaymentComponent = /** @class */ (function () {
         if (this.isDone) {
             console.log("ok");
             console.log("store to pick", this.storeToPickID);
-            this.db.collection("Stores").doc(this.storeToPickID).valueChanges().subscribe(function (storeToPickData) {
+            this.controlSubscription = this.db.collection("Stores").doc(this.storeToPickID).valueChanges().subscribe(function (storeToPickData) {
                 var productsInOrder = _this.tempCart;
                 productsInOrder.map(function (item) { return delete item.selectedStores; });
                 storeToPickData["address"] = storeToPickData["chiTiet"] + ", " + storeToPickData["xa"] + ", "
@@ -6913,6 +6926,7 @@ var PaymentComponent = /** @class */ (function () {
                 }
                 _this.db.collection("Orders").doc(_this.tempOrderID).set(order).then(function () {
                     _this.router.navigateByUrl("/pages/camera/cart/payment/done");
+                    console.log("it's ok to move to page done");
                 });
             });
         }

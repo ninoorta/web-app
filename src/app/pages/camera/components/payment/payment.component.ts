@@ -105,9 +105,7 @@ export class PaymentComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     // unsubscribe func when select store to pick
-    this.db.collection("Stores").doc(this.storeToPickID).valueChanges().subscribe().unsubscribe();
     this.controlSubscription.unsubscribe();
-    console.log("it's destroying now")
   }
 
 
