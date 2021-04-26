@@ -27777,7 +27777,10 @@ var LoginComponent = /** @class */ (function () {
         this.auth.logIn(this.email, this.password);
     };
     LoginComponent.prototype.openForgetPass = function () {
-        this.dialog.open(_components_forget_password_forget_password_component__WEBPACK_IMPORTED_MODULE_1__["ForgetPasswordComponent"], { autoFocus: false });
+        var _this = this;
+        this.dialog.open(_components_forget_password_forget_password_component__WEBPACK_IMPORTED_MODULE_1__["ForgetPasswordComponent"], { autoFocus: false }).afterClosed().subscribe(function () {
+            _this.authError = "";
+        });
     };
     LoginComponent.ɵfac = function LoginComponent_Factory(t) { return new (t || LoginComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_material_dialog__WEBPACK_IMPORTED_MODULE_2__["MatDialog"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_fire_auth__WEBPACK_IMPORTED_MODULE_3__["AngularFireAuth"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_4__["AngularFirestore"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_5__["Router"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_services_window_service__WEBPACK_IMPORTED_MODULE_6__["WindowService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_services_auth_service__WEBPACK_IMPORTED_MODULE_7__["AuthService"])); };
     LoginComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: LoginComponent, selectors: [["app-login"]], decls: 24, vars: 3, consts: [[1, "login"], [1, "container-fluid"], [1, "logo"], [1, "wrapper"], [1, "login__form"], [1, "login__form-title"], [1, "error-text"], [1, "container"], [1, "input__wrapper"], [1, "material-icons"], ["type", "email", "placeholder", "Nh\u1EADp email c\u1EE7a b\u1EA1n", 1, "email", 3, "ngModel", "ngModelChange"], ["type", "password", "placeholder", "Nh\u1EADp m\u1EADt kh\u1EA9u c\u1EE7a b\u1EA1n", 1, "password", 3, "ngModel", "ngModelChange"], [1, "signBtn", "btn", 3, "click"], [1, "forgetPass", 3, "click"], [1, "register"], ["routerLink", "/login/register", 1, "register__link"]], template: function LoginComponent_Template(rf, ctx) { if (rf & 1) {

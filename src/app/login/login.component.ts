@@ -57,7 +57,9 @@ export class LoginComponent implements OnInit {
   }
 
   openForgetPass() {
-    this.dialog.open(ForgetPasswordComponent, { autoFocus: false })
+    this.dialog.open(ForgetPasswordComponent, { autoFocus: false }).afterClosed().subscribe(() => {
+      this.authError = "";
+    })
   }
 
 

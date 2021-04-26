@@ -233,7 +233,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   chooseGenderType(type) {
     this.gender = type;
   }
-
+ 
 
   editMode() {
     this.isEdit = true;
@@ -257,7 +257,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
       fullName: this.fullName,
       phone: this.phone,
       address: this.address,
-      email: this.email,
       gender: this.gender,
       birthday: this.birthday
     }

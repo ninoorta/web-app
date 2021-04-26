@@ -6715,9 +6715,7 @@ var PaymentComponent = /** @class */ (function () {
     };
     PaymentComponent.prototype.ngOnDestroy = function () {
         // unsubscribe func when select store to pick
-        this.db.collection("Stores").doc(this.storeToPickID).valueChanges().subscribe().unsubscribe();
         this.controlSubscription.unsubscribe();
-        console.log("it's destroying now");
     };
     PaymentComponent.prototype.clickChange = function (event) {
         if (event.target.className.indexOf("direct") !== -1) {
