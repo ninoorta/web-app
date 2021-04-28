@@ -1543,7 +1543,6 @@ var ProfileComponent = /** @class */ (function () {
             fullName: this.fullName,
             phone: this.phone,
             address: this.address,
-            email: this.email,
             gender: this.gender,
             birthday: this.birthday
         };
@@ -1778,7 +1777,7 @@ var ProfileComponent = /** @class */ (function () {
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](5);
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngModel", ctx.address)("readonly", !ctx.isEdit);
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](5);
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngModel", ctx.email)("readonly", !ctx.isEdit);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngModel", ctx.email)("readonly", true);
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](8);
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate"](ctx.totalSpentMoney);
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
